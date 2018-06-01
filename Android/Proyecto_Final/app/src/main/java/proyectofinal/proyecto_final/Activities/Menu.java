@@ -9,7 +9,7 @@ import android.widget.TextView;
 import org.json.JSONObject;
 
 import proyectofinal.proyecto_final.Activities.Accidente.ListaAccidente;
-import proyectofinal.proyecto_final.Activities.Accidente.MapaAccidebte;
+import proyectofinal.proyecto_final.Activities.Accidente.MapaAccidente;
 import proyectofinal.proyecto_final.Activities.Accidente.RegistroAccidente;
 import proyectofinal.proyecto_final.Activities.Comparendo.BusquedaComparendo;
 import proyectofinal.proyecto_final.Activities.Comparendo.RegistrarComparendo;
@@ -67,6 +67,6 @@ public class Menu extends AppCompatActivity {
         startActivity(new Intent(this, ListaAccidente.class));
     }
     public void MMapa(View view){
-        startActivity(new Intent(this, MapaAccidebte.class));
+        startActivity(new Intent(this, MapaAccidente.class));
     }
 }

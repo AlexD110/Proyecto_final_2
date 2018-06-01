@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import proyectofinal.proyecto_final.R;
 
-public class MapaAccidebte extends FragmentActivity implements OnMapReadyCallback {
+public class MapaAccidente extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mapa;
     private final LatLng EAM = new LatLng(4.541763, -75.663464);
@@ -26,7 +26,7 @@ public class MapaAccidebte extends FragmentActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mapa_accidebte);
+        setContentView(R.layout.activity_mapa_accidente);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -77,7 +77,6 @@ public class MapaAccidebte extends FragmentActivity implements OnMapReadyCallbac
             Toast.makeText(getApplicationContext(),"No se ha dado permisos",Toast.LENGTH_SHORT).show();
             return;
         }else{
-
             mapa.setMyLocationEnabled(true);
         }
     }
