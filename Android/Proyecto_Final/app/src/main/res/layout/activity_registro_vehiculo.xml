@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Vehiculo.RegistroVehiculo">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="19dp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vehiculo"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="24dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="314dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/txtPlaca"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Placa del vehiculo"
+                        android:inputType="textPersonName" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="14dp" />
+
+                    <EditText
+                        android:id="@+id/txtLicenciaTransito_vehiculo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Licencia de transito"
+                        android:inputType="number" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="13dp" />
+
+                    <EditText
+                        android:id="@+id/txtModelo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Modelo del vehiculo"
+                        android:inputType="textPersonName" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="14dp" />
+
+                    <EditText
+                        android:id="@+id/txtLinea"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Linea del vehiculo"
+                        android:inputType="textPersonName" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
+                    <EditText
+                        android:id="@+id/txtMarca"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Marca del vehiculo"
+                        android:inputType="textPersonName" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="11dp" />
+
+                    <Spinner
+                        android:id="@+id/cbClaseVehiculo"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="11dp" />
+
+                    <LinearLayout
+                        android:id="@+id/lytEmpresa"
+                        android:layout_width="match_parent"
+                        android:layout_height="113dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="47dp"
+                            android:orientation="horizontal">
+
+                            <Spinner
+                                android:id="@+id/cbEmpresa_vehiculo"
+                                android:layout_width="243dp"
+                                android:layout_height="45dp"
+                                android:layout_weight="1" />
+
+                            <Space
+                                android:layout_width="wrap_content"
+                                android:layout_height="45dp"
+                                android:layout_weight="1" />
+
+                            <ImageButton
+                                android:id="@+id/btnAddEmpresa"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:onClick="abrirVentanaAddEmpresa"
+                                app:srcCompat="@mipmap/add" />
+
+                        </LinearLayout>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp" />
+
+                        <EditText
+                            android:id="@+id/txtNTarjetaOperacion_vehiculo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="N° Tarjeta de operación"
+                            android:inputType="number" />
+
+                    </LinearLayout>
+
+                    <Spinner
+                        android:id="@+id/cbTipoVehiculo"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:visibility="visible" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="12dp" />
+
+                    <Spinner
+                        android:id="@+id/cbNacionalidad_vehiculo"
+                        android:layout_width="match_parent"
+                        android:layout_height="39dp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="13dp" />
+
+                    <EditText
+                        android:id="@+id/txtLugarMatricula"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Lugar de matricula "
+                        android:inputType="textPersonName" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="13dp" />
+
+                    <EditText
+                        android:id="@+id/txtCapacidad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Capacidad del vehiculo"
+                        android:inputType="number" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="11dp" />
+
+                    <EditText
+                        android:id="@+id/txtNumeroPasajeros"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Ingrese el numero de pasajeros"
+                        android:inputType="number" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="52dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="159dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="registrar"
+                    android:text="Registrar" />
+
+                <Space
+                    android:layout_width="31dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="cancelar"
+                    android:text="Cancelar" />
+
+                <Space
+                    android:layout_width="57dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="21dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

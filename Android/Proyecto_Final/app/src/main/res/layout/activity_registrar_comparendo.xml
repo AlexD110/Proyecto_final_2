@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Comparendo.RegistrarComparendo">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="19dp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comparendo"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="24dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="314dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/txtfechaComparendo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Fecha del comparendo (año-mes-dia)"
+                        android:inputType="date" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="14dp" />
+
+                    <EditText
+                        android:id="@+id/txtLocalidad_Comuna"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Localidad de la realización"
+                        android:inputType="textPersonName" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="14dp" />
+
+                    <Spinner
+                        android:id="@+id/cbAvenidaPrincipal"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp" />
+
+                    <EditText
+                        android:id="@+id/txtAvenidaPrincipal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Avenida principal"
+                        android:inputType="textPersonName" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
+                    <Spinner
+                        android:id="@+id/cbAvenidaSecundaria"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp" />
+
+                    <EditText
+                        android:id="@+id/txtAvenidaSecundaria"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Avenida secundaria"
+                        android:inputType="textPersonName" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="11dp" />
+
+                    <Spinner
+                        android:id="@+id/cbModalidad"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="14dp" />
+
+                    <Spinner
+                        android:id="@+id/cbRadioAccion"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="11dp" />
+
+                    <Spinner
+                        android:id="@+id/cbTipoInfractor"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/txtDescripcion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Descripcion"
+                        android:inputType="textPersonName" />
+
+                    <Space
+                        android:id="@+id/space33"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/cbVehiculo"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_weight="1" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton"
+                            android:layout_width="98dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:onClick="abrirAddVehiculo"
+                            app:srcCompat="@mipmap/add" />
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <Spinner
+                        android:id="@+id/cbMunicipioComparendo"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="11dp" />
+
+                    <Spinner
+                        android:id="@+id/cbTipoinfraccion"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/cbInfractor"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_weight="1" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton2"
+                            android:layout_width="96dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:onClick="abrirAddPersona"
+                            app:srcCompat="@mipmap/add" />
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/cbTestigo"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_weight="1" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton3"
+                            android:layout_width="96dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:onClick="abrirAddPersona"
+                            app:srcCompat="@mipmap/add" />
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="52dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="159dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="registrar"
+                    android:text="Registrar" />
+
+                <Space
+                    android:layout_width="31dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="cancelar"
+                    android:text="Cancelar" />
+
+                <Space
+                    android:layout_width="57dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="21dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
