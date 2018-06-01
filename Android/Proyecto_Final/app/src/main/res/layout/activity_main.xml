@@ -113,6 +113,14 @@
                 android:layout_weight="1" />
 
             <Button
+                android:id="@+id/button11"
+                android:layout_width="208dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="MMapa"
+                android:text="Mapa" />
+
+            <Button
                 android:id="@+id/btnIngresar"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"

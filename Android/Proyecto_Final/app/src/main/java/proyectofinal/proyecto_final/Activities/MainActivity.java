@@ -1,5 +1,6 @@
 package proyectofinal.proyecto_final.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import proyectofinal.proyecto_final.Activities.Accidente.MapaAccidente;
 import proyectofinal.proyecto_final.Controlador.CtlUsuario;
 import proyectofinal.proyecto_final.R;
 
@@ -49,5 +51,9 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(this, "No se ha podido iniciar sesion", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void MMapa(View view){
+        startActivity(new Intent(this, MapaAccidente.class));
     }
 }
