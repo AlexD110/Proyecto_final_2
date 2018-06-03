@@ -38,6 +38,7 @@ public class CtlCombo extends Cliente {
         items.add("Bocina");
         items.add("Llantas");
         items.add("Suspension");
+        items.add("Ninguna falla");
 
         ArrayAdapter<CharSequence> dataAdapter = new ArrayAdapter(this.activity, android.R.layout.simple_spinner_item, new ArrayList(items));
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

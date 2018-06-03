@@ -5,6 +5,10 @@
  */
 package com.eam.proyecto.controlador;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -12,6 +16,54 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class CtlVehiculo extends ControladorAbstracto {
+
+    public DefaultTableModel listarFiltrado(Map<String, String> campos) {
+        String[] lista = {"Placa", "Modelo", "Linea", "Marca", "Clase vehiculo", "Tipo vehiculo", "Nacionalidad"};
+        DefaultTableModel modelo = new DefaultTableModel(new Object[][]{}, lista);
+        try {
+            String response = this.traerlistar("Vehiculo/TraerVehiculos/" + this.crearConsultaRegexpLike(campos));
+            JSONArray vehiculos = ((JSONArray) (new JSONParser().parse(response)));
+            for (int i = 0; i < vehiculos.size(); i++) {
+                JSONObject vehisulo2 = (JSONObject) vehiculos.get(i);
+                modelo.addRow(new Object[]{
+                    vehisulo2.get("placa").toString(),
+                    vehisulo2.get("modelo").toString(),
+                    vehisulo2.get("linea").toString(),
+                    vehisulo2.get("marca").toString(),
+                    vehisulo2.get("claseVehiculo").toString(),
+                    vehisulo2.get("tipoVehiculo").toString(),
+                    vehisulo2.get("nacionalidad").toString()
+
+                });
+            }
+        } catch (ParseException ex) {
+            System.out.println("[Error] : " + ex);
+        }
+        return modelo;
+    }
+
+    private String crearConsultaRegexpLike(Map<String, String> campos) {
+        String consulta = ""
+                + "SELECT "
+                + "     * "
+                + "FROM"
+                + "     Vehiculo "
+                + "WHERE ";
+
+        ArrayList<String> keys = new ArrayList<>(campos.keySet());
+
+        for (int i = 0; i < keys.size(); i++) {
+            consulta += " regexp_like(" + keys.get(i) + ",'" + campos.get(keys.get(i)) + "','i') ";
+            if (i != keys.size() - 1) {
+                consulta += " OR ";
+            }
+        }
+        try {
+            return URLEncoder.encode(consulta, "UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            return null;
+        }
+    }
 
     @Override
     public DefaultTableModel listar(String entidad) {
@@ -99,7 +151,7 @@ public class CtlVehiculo extends ControladorAbstracto {
             request.put("placa", placa);
             request.put("modelo", modelo);
             request.put("linea", linea);
-            if (!(empresa_nit==null)) {
+            if (!(empresa_nit == null)) {
                 empresa = ((JSONObject) (new JSONParser().parse(traerlistar("Empresa/" + Integer.parseInt(empresa_nit)))));
                 request.put("empresa_nit", empresa);
                 request.put("no_targeta_operacion", no_targeta_operacion);

@@ -52,8 +52,4 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "No se ha podido iniciar sesion", Toast.LENGTH_LONG).show();
         }
     }
-
-    public void MMapa(View view){
-        startActivity(new Intent(this, MapaAccidente.class));
-    }
 }
