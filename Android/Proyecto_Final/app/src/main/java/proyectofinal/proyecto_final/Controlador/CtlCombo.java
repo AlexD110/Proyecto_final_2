@@ -115,6 +115,240 @@ public class CtlCombo extends Cliente {
         spinner.setAdapter(dataAdapter);
     }
 
+    public void cargarCaracteristica1(Spinner spinner) {
+        List<String> items = new ArrayList<>();
+
+        items.add("Seleccione la geometria 1");
+        items.add("RECTA VIA 1");
+        items.add("RECTA VIA 2");
+        items.add("CURVA VIA 1");
+        items.add("CURVA VIA 2");
+
+        ArrayAdapter<CharSequence> dataAdapter = new ArrayAdapter(this.activity, android.R.layout.simple_spinner_item, new ArrayList(items));
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(dataAdapter);
+    }
+
+    public void cargarCaracteristica2(Spinner spinner) {
+        List<String> items = new ArrayList<>();
+
+        items.add("Seleccione la geometria 2");
+        items.add("PLANO  VIA 1");
+        items.add("PLANO VIA 2");
+        items.add("PENDIENTE VIA 1");
+        items.add("PENDIENTE VIA 2");
+
+        ArrayAdapter<CharSequence> dataAdapter = new ArrayAdapter(this.activity, android.R.layout.simple_spinner_item, new ArrayList(items));
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(dataAdapter);
+    }
+
+    public void cargarCaracteristica3(Spinner spinner) {
+        List<String> items = new ArrayList<>();
+
+        items.add("Seleccione la geometria 3");
+        items.add("CON VERNAS VIA 1");
+        items.add("CON VERNAS VIA 2");
+        items.add("SIN VERNAS VIA 1");
+        items.add("SIN VERNAS VIA 2");
+
+        ArrayAdapter<CharSequence> dataAdapter = new ArrayAdapter(this.activity, android.R.layout.simple_spinner_item, new ArrayList(items));
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(dataAdapter);
+    }
+
+    public void cargarUtilizacion(Spinner spinner) {
+        List<String> items = new ArrayList<>();
+
+        items.add("Seleccione la utilización de la via");
+        items.add("UN SENTIDO VIA 1");
+        items.add("UN SENTIDO VIA 2");
+        items.add("DOBLE SENTIDO VIA 1");
+        items.add("DOBLE SENTIDO VIA 2");
+        items.add("REVERSIBLE VIA 1");
+        items.add("REVERSIBLE VIA 2");
+        items.add("CICLOVIA VIA 1");
+        items.add("CICLOVIA VIA 2");
+
+        ArrayAdapter<CharSequence> dataAdapter = new ArrayAdapter(this.activity, android.R.layout.simple_spinner_item, new ArrayList(items));
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(dataAdapter);
+    }
+
+    public void cargarCarrilCalzada(Spinner spinner) {
+        List<String> items = new ArrayList<>();
+
+        items.add("Seleccione el carril");
+        items.add("UNA VIA 1");
+        items.add("UNA VIA 2");
+        items.add("DOS VIA 1");
+        items.add("DOS VIA 2");
+        items.add("TRES VIA 1");
+        items.add("TRES VIA 2");
+        items.add("CUATRO O MAS VIA 1");
+        items.add("CUATRO O MAS VIA 2");
+        items.add("VARIABLE VIA 1");
+        items.add("VARIABLE VIA 2");
+
+        ArrayAdapter<CharSequence> dataAdapter = new ArrayAdapter(this.activity, android.R.layout.simple_spinner_item, new ArrayList(items));
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(dataAdapter);
+    }
+
+    public void cargarMaterial(Spinner spinner) {
+        List<String> items = new ArrayList<>();
+
+        items.add("Seleccione el material de la via");
+        items.add("ASALTO VIA 1");
+        items.add("ASFALTO VIA 2");
+        items.add("CONCRETO VIA 1");
+        items.add("CONCRETO VIA 2");
+        items.add("AFIRMADO VIA 1");
+        items.add("AFIRMADO VIA 2");
+        items.add("TIRRRA VIA 1");
+        items.add("TIERRA VIA 2");
+
+        ArrayAdapter<CharSequence> dataAdapter = new ArrayAdapter(this.activity, android.R.layout.simple_spinner_item, new ArrayList(items));
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(dataAdapter);
+    }
+
+    public void cargarEstadoVia(Spinner spinner) {
+        List<String> items = new ArrayList<>();
+
+        items.add("Seleccione el estado de la via");
+        items.add("BUENO VIA 1");
+        items.add("BUENO VIA 2");
+        items.add("CON HUECOS VIA 1");
+        items.add("CON HUECOS VIA 2");
+        items.add("EN REPARACION VIA 1");
+        items.add("EN REPARACION VIA 2");
+        items.add("HUNDIMIENTOS VIA 1");
+        items.add("HUNDIMIENTOIS VIA 2");
+        items.add("DERRUMBES VIA 1");
+        items.add("DERRUMBES VIA 2");
+        items.add("PARCHAO VIA 1");
+        items.add("PARCHADO VIA 2");
+        items.add("RIZADO VIA 1");
+        items.add("RIZADO VIA 2");
+        items.add("INUNDA VIA 1");
+        items.add("INUNDA VIA 2");
+
+        ArrayAdapter<CharSequence> dataAdapter = new ArrayAdapter(this.activity, android.R.layout.simple_spinner_item, new ArrayList(items));
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(dataAdapter);
+    }
+
+    public void cargarCondicion(Spinner spinner) {
+        List<String> items = new ArrayList<>();
+
+        items.add("Seleccione condición de la via");
+        items.add("SECA VIA 1");
+        items.add("SECA VIA 2");
+        items.add("HUMEDA VIA 1");
+        items.add("HUMEDA VIA 2");
+        items.add("MATERIAL SUELTO VIA 1");
+        items.add("MATERIAL SUELTO VIA 2");
+        items.add("ACEITE VIA 1");
+        items.add("ACEITE VIA 2");
+
+        ArrayAdapter<CharSequence> dataAdapter = new ArrayAdapter(this.activity, android.R.layout.simple_spinner_item, new ArrayList(items));
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(dataAdapter);
+    }
+
+    public void cargarIluminacion(Spinner spinner) {
+        List<String> items = new ArrayList<>();
+
+        items.add("Seleccione la iluminación de la via");
+        items.add("CON VIA 1");
+        items.add("CON VIA 2");
+        items.add("SIN VIA 1");
+        items.add("SIN VIA 2");
+        items.add("BUENA VIA 1");
+        items.add("BUENA VIA 2");
+        items.add("MALA VIA 1");
+        items.add("MALA VIA 2");
+
+        ArrayAdapter<CharSequence> dataAdapter = new ArrayAdapter(this.activity, android.R.layout.simple_spinner_item, new ArrayList(items));
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(dataAdapter);
+    }
+
+    public void cargarDisminucion(Spinner spinner) {
+        List<String> items = new ArrayList<>();
+
+        items.add("Seleccione la disminución visual de la via");
+        items.add("VEHICULO ESTACIONADO VIA 1");
+        items.add("VEHICULO ESTACIONADO VIA 2");
+        items.add("VEGETACION VIA 1");
+        items.add("VEGETACION VIA 2");
+        items.add("CONSTRUCCION VIA 1");
+        items.add("CONSTRUCCION VIA 2");
+        items.add("AVISO VIA 1");
+        items.add("AVISO VIA 2");
+        items.add("POSTE VIA 1");
+        items.add("POSTE VIA 2");
+
+        ArrayAdapter<CharSequence> dataAdapter = new ArrayAdapter(this.activity, android.R.layout.simple_spinner_item, new ArrayList(items));
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(dataAdapter);
+    }
+
+    public void cargarSemaforo(Spinner spinner) {
+        List<String> items = new ArrayList<>();
+
+        items.add("Seleccione un estado de semaforo");
+        items.add("OPERANDO VIA 1");
+        items.add("OPERANDO VIA 2");
+        items.add("INTERMITENTE VIA 1");
+        items.add("INTERMITENTE VIA 2");
+        items.add("CON DAÑOS VIA 1");
+        items.add("CON DAÑOS VIA 2");
+        items.add("SIN DAÑOS VIA 1");
+        items.add("SIN DAÑOS VIA 2");
+        items.add("APAGADO VIA 1");
+        items.add("APAGADO VIA 2");
+        items.add("SIN SEMAFORO VIA 1");
+        items.add("SIN SEMAFORO VIA 2");
+
+        ArrayAdapter<CharSequence> dataAdapter = new ArrayAdapter(this.activity, android.R.layout.simple_spinner_item, new ArrayList(items));
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(dataAdapter);
+    }
+
+    public void cargarDemarcacion(Spinner spinner) {
+        List<String> items = new ArrayList<>();
+
+        items.add("Seleccione la demarcación de la via");
+        items.add("ZONA PEATONAL VIA 1");
+        items.add("ZONA PEATONAL VIA 2");
+        items.add("LINEA PADRE VIA 1");
+        items.add("LINEA PADRE VIA 2");
+        items.add("LINEA CENTRAL VIA 1");
+        items.add("LINEA CENTRAL VIA 2");
+        items.add("LINEA DE BORDE VIA 2");
+        items.add("LINEA DE BORDE VIA 1");
+        items.add("LINEA DE CARRIL VIA 1");
+        items.add("LINEA DE CARRIL VIA 2");
+
+        ArrayAdapter<CharSequence> dataAdapter = new ArrayAdapter(this.activity, android.R.layout.simple_spinner_item, new ArrayList(items));
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(dataAdapter);
+    }
+
     public void cargarViaSecundaria(Spinner spinner) {
         List<String> items = new ArrayList<>();
 

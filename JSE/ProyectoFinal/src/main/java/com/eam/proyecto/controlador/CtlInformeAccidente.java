@@ -280,7 +280,7 @@ public class CtlInformeAccidente extends ControladorAbstracto {
 
     private String crearJson(String coordenadaX, String coordenadaY, String direccionAccidente, String LocalidadComunaAccidente, int id) {
         try {
-            //Caracteristicas via
+            //Lugar
             JSONObject request = new JSONObject();
             if (coordenadaX != null && coordenadaY != null) {
                 request.put("coordenadaY", coordenadaY);

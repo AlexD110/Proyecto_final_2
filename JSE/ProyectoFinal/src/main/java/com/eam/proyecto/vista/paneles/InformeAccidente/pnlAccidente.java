@@ -2,6 +2,7 @@ package com.eam.proyecto.vista.paneles.InformeAccidente;
 
 import com.eam.proyecto.controlador.CtlComboBox;
 import com.eam.proyecto.controlador.CtlInformeAccidente;
+import com.eam.proyecto.controlador.CtlReportes;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -111,6 +112,7 @@ public class pnlAccidente extends javax.swing.JPanel {
         tblInformeAccidente = new javax.swing.JTable();
         txtBusqueda = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         cbDisminucion = new javax.swing.JComboBox<>();
         jLabel29 = new javax.swing.JLabel();
@@ -343,7 +345,7 @@ public class pnlAccidente extends javax.swing.JPanel {
 
         cbCaract2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione la geometria 2", "PLANO  VIA 1", "PLANO VIA 2", "PENDIENTE VIA 1", "PENDIENTE VIA 2 " }));
 
-        cbCaract3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione la geometria 3", "CON VERNAS  VIA 1", "CON VERNAS VIA 2", "SIN BERNAS VIA 1", "SIN BERNAS VIA 2" }));
+        cbCaract3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione la geometria 3", "CON VERNAS VIA 1", "CON VERNAS VIA 2", "SIN BERNAS VIA 1", "SIN BERNAS VIA 2" }));
 
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -372,7 +374,7 @@ public class pnlAccidente extends javax.swing.JPanel {
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Estado de la via:");
 
-        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el estado de la via", "BUENO VIA 1", "BUENO VIA 2", "CON HUECOS VIA 1", "CON HUECOS VIA 2", "EN REPARACION VIA 1", "EN REPARACION VIA 2", "HUNDIMIENTOS VIA 1", "HUNDIMIENTOIS VIA 2", "DERRUMBES VIA 1", "DERRUMBES VIA 2", "PARCHAO VIA 1", "PARCHADO VIA 2", "RIZADO VIA 1", "RIZADO VIA 2", "INUNDA VIA 1", "INUNDA VIA2" }));
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el estado de la via", "BUENO VIA 1", "BUENO VIA 2", "CON HUECOS VIA 1", "CON HUECOS VIA 2", "EN REPARACION VIA 1", "EN REPARACION VIA 2", "HUNDIMIENTOS VIA 1", "HUNDIMIENTOIS VIA 2", "DERRUMBES VIA 1", "DERRUMBES VIA 2", "PARCHAO VIA 1", "PARCHADO VIA 2", "RIZADO VIA 1", "RIZADO VIA 2", "INUNDA VIA 1", "INUNDA VIA 2" }));
 
         cbCondicion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione condición de la via", "SECA VIA 1", "SECA VIA 2", "HUMEDA VIA 1", "HUMEDA VIA 2", "MATERIAL SUELTO VIA 1", "MATERIAL SUELTO VIA 2", "ACEITE VIA 1", "ACEITE VIA 2" }));
 
@@ -602,6 +604,13 @@ public class pnlAccidente extends javax.swing.JPanel {
         jLabel36.setForeground(new java.awt.Color(255, 255, 255));
         jLabel36.setText("Buscador");
 
+        jButton1.setText("Generar Reporte");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -613,7 +622,8 @@ public class pnlAccidente extends javax.swing.JPanel {
                     .addComponent(txtBusqueda, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel36)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -624,8 +634,10 @@ public class pnlAccidente extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel8.setBackground(new java.awt.Color(5, 117, 154));
@@ -643,7 +655,7 @@ public class pnlAccidente extends javax.swing.JPanel {
         jLabel30.setForeground(new java.awt.Color(255, 255, 255));
         jLabel30.setText("Semaforo de la via:");
 
-        cbSemaforo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un item", "OPERANDO VIA 1", "OPERANDO VIA 2", "INTERMITENTE VIA 1", "INTERMITENTE VIA 2", "CON DAÑOS VIA 1", "SIN DAÑOS VIA 2", "APAGADO VIA 1", "APAGADO VIA 2" }));
+        cbSemaforo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un item", "OPERANDO VIA 1", "OPERANDO VIA 2", "INTERMITENTE VIA 1", "INTERMITENTE VIA 2", "CON DAÑOS VIA 1", "CON DAÑOS VIA 2", "SIN DAÑOS VIA 1", "SIN DAÑOS VIA 2", "APAGADO VIA 1", "APAGADO VIA 2", "SIN SEMAFORO VIA 1", "SIN SEMAFORO VIA 2" }));
 
         jLabel31.setForeground(new java.awt.Color(255, 255, 255));
         jLabel31.setText("Señale de la via:");
@@ -1186,6 +1198,10 @@ public class pnlAccidente extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtBusquedaKeyReleased
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new CtlReportes().generarReporte();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAniadirCroquis;
     private javax.swing.JButton btnAniadirTestigos;
@@ -1216,6 +1232,7 @@ public class pnlAccidente extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbTiempoAccidente;
     private javax.swing.JComboBox<String> cbUtilizacion;
     private javax.swing.JComboBox<String> cbZonaAccidente;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1332,36 +1349,36 @@ public class pnlAccidente extends javax.swing.JPanel {
         this.spnHeridos.setValue(Integer.parseInt(obj.get("numeroHeridos").toString()));
         this.spnMuertos.setValue(Integer.parseInt(obj.get("numeroMuertos").toString()));
         JSONObject caracLugar = (JSONObject) obj.get("caracteristicaLugar");
-        this.cbAreaAccidente.setSelectedItem(caracLugar.get("areaId").toString());
-        this.cbSectorAccidente.setSelectedItem(caracLugar.get("sectorId").toString());
-        this.cbZonaAccidente.setSelectedItem(caracLugar.get("zonaId").toString());
-        this.cbDisenioAccidente.setSelectedItem(caracLugar.get("disenioId").toString());
-        this.cbTiempoAccidente.setSelectedItem(caracLugar.get("tiempoId").toString());
+        this.cbAreaAccidente.setSelectedItem(URLDecoder.decode(caracLugar.get("areaId").toString(),"UTF-8"));
+        this.cbSectorAccidente.setSelectedItem(URLDecoder.decode(caracLugar.get("sectorId").toString(),"UTF-8"));
+        this.cbZonaAccidente.setSelectedItem(URLDecoder.decode(caracLugar.get("zonaId").toString(),"UTF-8"));
+        this.cbDisenioAccidente.setSelectedItem(URLDecoder.decode(caracLugar.get("disenioId").toString(),"UTF-8"));
+        this.cbTiempoAccidente.setSelectedItem(URLDecoder.decode(caracLugar.get("tiempoId").toString(),"UTF-8"));
         JSONObject lugar = (JSONObject) obj.get("lugar");
         if (lugar.get("coordenandaX").toString() != null && lugar.get("coordenadaY").toString() != null) {
-            this.txtCoordenadaX.setText(lugar.get("coordenandaX").toString());
-            this.txtCoordenadaY.setText(lugar.get("coordenadaY").toString());
+            this.txtCoordenadaX.setText(URLDecoder.decode(lugar.get("coordenandaX").toString(),"UTF-8"));
+            this.txtCoordenadaY.setText(URLDecoder.decode(lugar.get("coordenadaY").toString(),"UTF-8"));
         }
-        this.txtDireccionAccidente.setText(lugar.get("direccion").toString());
-        this.txtLocalidadComunaAccidente.setText(lugar.get("localidadComuna").toString());
+        this.txtDireccionAccidente.setText(URLDecoder.decode(lugar.get("direccion").toString(),"UTF-8"));
+        this.txtLocalidadComunaAccidente.setText(URLDecoder.decode(lugar.get("localidadComuna").toString(),"UTF-8"));
         JSONObject agente = (JSONObject) obj.get("agente");
-        this.controladorComboBox.modeloListaFiltrado(this.lstAgentes, agente.get("nip").toString());
+        this.controladorComboBox.modeloListaFiltrado(this.lstAgentes, URLDecoder.decode(agente.get("nip").toString(),"UTF-8"));
         this.lstAgentes.setSelectedIndex(0);
         this.txtAgente.setText(this.lstAgentes.getSelectedValue());
         JSONObject caracVia = (JSONObject) obj.get("caracteristicaVia");
-        this.cbCaract1.setSelectedItem(caracVia.get("caracGeometricaVia1").toString());
-        this.cbCaract2.setSelectedItem(caracVia.get("caracGeometricaVia2").toString());
-        this.cbCaract3.setSelectedItem(caracVia.get("caracGeometricaVia3").toString());
-        this.cbUtilizacion.setSelectedItem(caracVia.get("utilizacion").toString());
-        this.cbCalzada.setSelectedItem(caracVia.get("calzada").toString());
-        this.cbCarril.setSelectedItem(caracVia.get("carril").toString());
-        this.cbMaterial.setSelectedItem(caracVia.get("material").toString());
-        this.cbEstado.setSelectedItem(caracVia.get("estado").toString());
+        this.cbCaract1.setSelectedItem(URLDecoder.decode(caracVia.get("caracGeometricaVia1").toString(),"UTF-8"));
+        this.cbCaract2.setSelectedItem(URLDecoder.decode(caracVia.get("caracGeometricaVia2").toString(),"UTF-8"));
+        this.cbCaract3.setSelectedItem(URLDecoder.decode(caracVia.get("caracGeometricaVia3").toString(),"UTF-8"));
+        this.cbUtilizacion.setSelectedItem(URLDecoder.decode(caracVia.get("utilizacion").toString(),"UTF-8"));
+        this.cbCalzada.setSelectedItem(URLDecoder.decode(caracVia.get("calzada").toString(),"UTF-8"));
+        this.cbCarril.setSelectedItem(URLDecoder.decode(caracVia.get("carril").toString(),"UTF-8"));
+        this.cbMaterial.setSelectedItem(URLDecoder.decode(caracVia.get("material").toString(),"UTF-8"));
+        this.cbEstado.setSelectedItem(URLDecoder.decode(caracVia.get("estado").toString(),"UTF-8"));
         if (caracVia.get("condicion").toString() != null) {
-            this.cbCondicion.setSelectedItem(caracVia.get("condicion").toString());
+            this.cbCondicion.setSelectedItem(URLDecoder.decode(caracVia.get("condicion").toString(),"UTF-8"));
         }
-        this.cbIluminacion.setSelectedItem(caracVia.get("iluminacion").toString());
-        String disminu = caracVia.get("disminucionVisual").toString();
+        this.cbIluminacion.setSelectedItem(URLDecoder.decode(caracVia.get("iluminacion").toString(),"UTF-8"));
+        String disminu = URLDecoder.decode(caracVia.get("disminucionVisual").toString(),"UTF-8");
         if (disminu.contains(" - ")) {
             this.cbDisminucion.setSelectedItem(disminu.split(" - ")[0]);
             this.txtDisminucionVisual.setText(disminu.split(" - ")[1]);
@@ -1369,9 +1386,9 @@ public class pnlAccidente extends javax.swing.JPanel {
             this.cbDisminucion.setSelectedItem(disminu);
             this.txtDisminucionVisual.setText("");
         }
-        this.cbSemaforo.setSelectedItem(caracVia.get("controlSemaforo").toString());
-        this.txtSenial.setText(caracVia.get("controlSenales").toString());
-        String demarca = caracVia.get("controlDemarcacion").toString();
+        this.cbSemaforo.setSelectedItem(URLDecoder.decode(caracVia.get("controlSemaforo").toString(),"UTF-8"));
+        this.txtSenial.setText(URLDecoder.decode(caracVia.get("controlSenales").toString(),"UTF-8"));
+        String demarca = URLDecoder.decode(caracVia.get("controlDemarcacion").toString(),"UTF-8");
         if (demarca.contains(" - ")) {
             this.cbDemarcacion.setSelectedItem(demarca.split(" - ")[0]);
             this.txtDemarcacion.setText(demarca.split(" - ")[1]);

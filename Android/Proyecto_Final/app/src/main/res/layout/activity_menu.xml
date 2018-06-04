@@ -191,12 +191,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
 
-                            <Button
-                                android:id="@+id/btnMapa"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:onClick="MMapa"
-                                android:text="Ver Mapa" />
                         </LinearLayout>
                     </ScrollView>
 

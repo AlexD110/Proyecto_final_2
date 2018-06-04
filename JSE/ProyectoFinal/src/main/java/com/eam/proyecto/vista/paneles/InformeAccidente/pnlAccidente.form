@@ -718,7 +718,7 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">
                     <StringItem index="0" value="Seleccione la geometria 3"/>
-                    <StringItem index="1" value="CON VERNAS  VIA 1"/>
+                    <StringItem index="1" value="CON VERNAS VIA 1"/>
                     <StringItem index="2" value="CON VERNAS VIA 2"/>
                     <StringItem index="3" value="SIN BERNAS VIA 1"/>
                     <StringItem index="4" value="SIN BERNAS VIA 2"/>
@@ -882,7 +882,7 @@
                     <StringItem index="13" value="RIZADO VIA 1"/>
                     <StringItem index="14" value="RIZADO VIA 2"/>
                     <StringItem index="15" value="INUNDA VIA 1"/>
-                    <StringItem index="16" value="INUNDA VIA2"/>
+                    <StringItem index="16" value="INUNDA VIA 2"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -1128,10 +1128,11 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane1" pref="514" max="32767" attributes="0"/>
                           <Component id="txtBusqueda" alignment="1" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="jButton1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1145,8 +1146,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtBusqueda" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="283" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="241" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jButton1" pref="31" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1185,6 +1188,14 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscador"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Generar Reporte"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1301,16 +1312,20 @@
             <Component class="javax.swing.JComboBox" name="cbSemaforo">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="9">
+                  <StringArray count="13">
                     <StringItem index="0" value="Seleccione un item"/>
                     <StringItem index="1" value="OPERANDO VIA 1"/>
                     <StringItem index="2" value="OPERANDO VIA 2"/>
                     <StringItem index="3" value="INTERMITENTE VIA 1"/>
                     <StringItem index="4" value="INTERMITENTE VIA 2"/>
                     <StringItem index="5" value="CON DA&#xd1;OS VIA 1"/>
-                    <StringItem index="6" value="SIN DA&#xd1;OS VIA 2"/>
-                    <StringItem index="7" value="APAGADO VIA 1"/>
-                    <StringItem index="8" value="APAGADO VIA 2"/>
+                    <StringItem index="6" value="CON DA&#xd1;OS VIA 2"/>
+                    <StringItem index="7" value="SIN DA&#xd1;OS VIA 1"/>
+                    <StringItem index="8" value="SIN DA&#xd1;OS VIA 2"/>
+                    <StringItem index="9" value="APAGADO VIA 1"/>
+                    <StringItem index="10" value="APAGADO VIA 2"/>
+                    <StringItem index="11" value="SIN SEMAFORO VIA 1"/>
+                    <StringItem index="12" value="SIN SEMAFORO VIA 2"/>
                   </StringArray>
                 </Property>
               </Properties>

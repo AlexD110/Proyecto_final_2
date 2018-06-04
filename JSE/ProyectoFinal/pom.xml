@@ -7,6 +7,11 @@
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.1.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
             <version>2.27</version>
@@ -90,6 +95,11 @@
                     <artifactId>zip4j</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>12.2.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.github.binodnme</groupId>
