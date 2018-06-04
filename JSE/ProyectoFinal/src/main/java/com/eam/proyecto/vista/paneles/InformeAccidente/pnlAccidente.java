@@ -1,9 +1,18 @@
 package com.eam.proyecto.vista.paneles.InformeAccidente;
 
 import com.eam.proyecto.controlador.CtlComboBox;
+import com.eam.proyecto.controlador.CtlInformeAccidente;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.json.simple.JSONObject;
 
 /**
  * @author Daryl Ospina
@@ -14,12 +23,15 @@ public class pnlAccidente extends javax.swing.JPanel {
     private final CtlComboBox controladorComboBox;
     private File croquis;
     private int idInforme;
+    private final CtlInformeAccidente controladorAccidente;
 
     public pnlAccidente(JFrame parent) {
         initComponents();
         this.padre = parent;
         this.controladorComboBox = new CtlComboBox();
         this.llenarLista();
+        this.controladorAccidente = new CtlInformeAccidente();
+        this.listarInformes();
     }
 
     @SuppressWarnings("unchecked")
@@ -31,7 +43,7 @@ public class pnlAccidente extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtFechaAccidente = new com.toedter.calendar.JDateChooser();
-        cbGavedadAccidente = new javax.swing.JComboBox<>();
+        cbGravedadAccidente = new javax.swing.JComboBox<>();
         cbClaseAccidente = new javax.swing.JComboBox<>();
         cbChoqueCon = new javax.swing.JComboBox<>();
         cbObjetoFijo = new javax.swing.JComboBox<>();
@@ -97,6 +109,8 @@ public class pnlAccidente extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblInformeAccidente = new javax.swing.JTable();
+        txtBusqueda = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         cbDisminucion = new javax.swing.JComboBox<>();
         jLabel29 = new javax.swing.JLabel();
@@ -111,10 +125,9 @@ public class pnlAccidente extends javax.swing.JPanel {
         jLabel34 = new javax.swing.JLabel();
         txtDemarcacion = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
-        btnBuscar = new javax.swing.JButton();
+        btnPasarAEditar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
+        btnTerminarAnexos = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         btnRegistrar = new javax.swing.JButton();
 
@@ -129,7 +142,7 @@ public class pnlAccidente extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(5, 117, 154));
 
-        cbGavedadAccidente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo de graveda", "Con muertos", "Con heridos", "Solo daños" }));
+        cbGravedadAccidente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo de graveda", "Con muertos", "Con heridos", "Solo daños" }));
 
         cbClaseAccidente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una clase del accidente", "Choque", "Atropello", "Volcamiento", "Caida ocupante", "Incendio", "Otro" }));
 
@@ -173,7 +186,7 @@ public class pnlAccidente extends javax.swing.JPanel {
                     .addComponent(cbClaseAccidente, 0, 264, Short.MAX_VALUE)
                     .addComponent(cbChoqueCon, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbObjetoFijo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbGavedadAccidente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbGravedadAccidente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(spnHeridos, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,7 +211,7 @@ public class pnlAccidente extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbGavedadAccidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbGravedadAccidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -580,21 +593,39 @@ public class pnlAccidente extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblInformeAccidente);
 
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyReleased(evt);
+            }
+        });
+
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel36.setText("Buscador");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                    .addComponent(txtBusqueda, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel36)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel8.setBackground(new java.awt.Color(5, 117, 154));
@@ -693,23 +724,26 @@ public class pnlAccidente extends javax.swing.JPanel {
 
         jPanel9.setBackground(new java.awt.Color(5, 117, 154));
 
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnPasarAEditar.setText("Pasar a editar");
+        btnPasarAEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+                btnPasarAEditarActionPerformed(evt);
             }
         });
 
         btnModificar.setText("Modificar");
         btnModificar.setEnabled(false);
-
-        btnEliminar.setText("Eliminar");
-
-        btnActualizar.setText("Actualizar lista");
-        btnActualizar.setEnabled(false);
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        btnTerminarAnexos.setText("Terminar Anexos");
+        btnTerminarAnexos.setEnabled(false);
+        btnTerminarAnexos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminarAnexosActionPerformed(evt);
             }
         });
 
@@ -719,13 +753,11 @@ public class pnlAccidente extends javax.swing.JPanel {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPasarAEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTerminarAnexos, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -733,10 +765,9 @@ public class pnlAccidente extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscar)
+                    .addComponent(btnPasarAEditar)
                     .addComponent(btnModificar)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnActualizar))
+                    .addComponent(btnTerminarAnexos))
                 .addContainerGap())
         );
 
@@ -829,25 +860,23 @@ public class pnlAccidente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAniadirVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAniadirVehiculosActionPerformed
-        FrmAccidente_VehiculoAfectado ventanaVehiculo = new FrmAccidente_VehiculoAfectado(padre, true, this.idInforme);
-        ventanaVehiculo.setLocationRelativeTo(null);
-        ventanaVehiculo.setVisible(true);
-        this.btnRegistrar.setEnabled(true);
-        this.btnBuscar.setEnabled(true);
-        this.btnEliminar.setEnabled(true);
-        this.btnAniadirVehiculos.setEnabled(false);
-        this.btnAniadirTestigos.setEnabled(false);
+        if (this.idInforme != 0) {
+            FrmAccidente_VehiculoAfectado ventanaVehiculo = new FrmAccidente_VehiculoAfectado(padre, true, this.idInforme);
+            ventanaVehiculo.setLocationRelativeTo(null);
+            ventanaVehiculo.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un error con el informe. por favor contacte a el administrador");
+        }
     }//GEN-LAST:event_btnAniadirVehiculosActionPerformed
 
     private void btnAniadirTestigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAniadirTestigosActionPerformed
-        FrmAccidente_Perjudicados_Testigos ventanaTestigos = new FrmAccidente_Perjudicados_Testigos(padre, true, this.idInforme, 1);
-        ventanaTestigos.setLocationRelativeTo(null);
-        ventanaTestigos.setVisible(true);
-        this.btnRegistrar.setEnabled(true);
-        this.btnBuscar.setEnabled(true);
-        this.btnEliminar.setEnabled(true);
-        this.btnAniadirVehiculos.setEnabled(false);
-        this.btnAniadirTestigos.setEnabled(false);
+        if (this.idInforme != 0) {
+            FrmAccidente_Perjudicados_Testigos ventanaTestigos = new FrmAccidente_Perjudicados_Testigos(padre, true, this.idInforme, 1);
+            ventanaTestigos.setLocationRelativeTo(null);
+            ventanaTestigos.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un error con el informe. por favor contacte a el administrador");
+        }
     }//GEN-LAST:event_btnAniadirTestigosActionPerformed
 
     private void lstAgentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstAgentesMouseClicked
@@ -891,42 +920,280 @@ public class pnlAccidente extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAniadirCroquisActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "¿Desea añadir algun anexo a este informe?") == 0) {
-            this.btnAniadirVehiculos.setEnabled(true);
-            this.btnAniadirTestigos.setEnabled(true);
-            this.btnRegistrar.setEnabled(false);
-            this.btnBuscar.setEnabled(false);
-            this.btnEliminar.setEnabled(false);
+        if (this.txtFechaAccidente.getDate() == null || this.cbGravedadAccidente.getSelectedIndex() == 0
+                || this.cbClaseAccidente.getSelectedIndex() == 0 || this.cbChoqueCon.getSelectedIndex() == 0
+                || this.cbObjetoFijo.getSelectedIndex() == 0 || Integer.parseInt(this.spnHeridos.getValue().toString()) < 0
+                || Integer.parseInt(this.spnMuertos.getValue().toString()) < 0 || this.cbAreaAccidente.getSelectedIndex() == 0
+                || this.cbSectorAccidente.getSelectedIndex() == 0 || this.cbZonaAccidente.getSelectedIndex() == 0
+                || this.cbDisenioAccidente.getSelectedIndex() == 0 || this.cbTiempoAccidente.getSelectedIndex() == 0
+                || this.txtDireccionAccidente.getText().trim().isEmpty() || this.txtLocalidadComunaAccidente.getText().trim().isEmpty()
+                || this.cbCaract1.getSelectedIndex() == 0 || this.cbCaract2.getSelectedIndex() == 0 || this.cbCaract3.getSelectedIndex() == 0
+                || this.cbUtilizacion.getSelectedIndex() == 0 || this.cbCalzada.getSelectedIndex() == 0 || this.cbCarril.getSelectedIndex() == 0
+                || this.cbMaterial.getSelectedIndex() == 0 || this.cbEstado.getSelectedIndex() == 0
+                || this.cbIluminacion.getSelectedIndex() == 0 || this.txtAgente.getText().trim().isEmpty() || this.cbDisminucion.getSelectedIndex() == 0
+                || (this.cbDisminucion.getSelectedIndex() == 11 && this.txtDisminucionVisual.getText().trim().isEmpty())
+                || this.cbSemaforo.getSelectedIndex() == 0 || this.txtSenial.getText().trim().isEmpty() || this.cbDemarcacion.getSelectedIndex() == 0
+                || (this.cbDemarcacion.getSelectedIndex() == 11 && this.txtDemarcacion.getText().trim().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Por favor llene los campos requeridos (*)");
+        } else {
+
+            Date fechaAccidente;
+            String tipoGravedad, claseAccidente, choqueCon, objetoFijo, areaAccidente, sectorAccidente, zonaAccidente, disenioAccidente,
+                    tiempo, coordenadaX = null, coordenadaY = null, direccionAccidente, LocalidadComunaAccidente, carac1, carac2, carac3, utilizacion,
+                    calzada, carril, material, estado, condicion = null, ilumunacion, nipAgente, disminucion, semaforo, senial,
+                    demarcacion;
+            int numHeridos, numMuertos, id = this.controladorAccidente.id();
+
+            fechaAccidente = this.txtFechaAccidente.getDate();
+            tipoGravedad = this.cbGravedadAccidente.getSelectedItem().toString().trim();
+            claseAccidente = this.cbClaseAccidente.getSelectedItem().toString().trim();
+            choqueCon = this.cbChoqueCon.getSelectedItem().toString().trim();
+            objetoFijo = this.cbObjetoFijo.getSelectedItem().toString().trim();
+            areaAccidente = this.cbAreaAccidente.getSelectedItem().toString().trim();
+            sectorAccidente = this.cbSectorAccidente.getSelectedItem().toString().trim();
+            zonaAccidente = this.cbZonaAccidente.getSelectedItem().toString().trim();
+            disenioAccidente = this.cbDisenioAccidente.getSelectedItem().toString().trim();
+            tiempo = this.cbTiempoAccidente.getSelectedItem().toString().trim();
+            if (this.cbCondicion.getSelectedIndex() != 0) {
+                condicion = this.cbCondicion.getSelectedItem().toString().trim();
+            }
+            if (!this.txtCoordenadaX.getText().trim().isEmpty() || !this.txtCoordenadaY.getText().trim().isEmpty()) {
+                if (this.txtCoordenadaX.getText().trim().isEmpty() && !this.txtCoordenadaY.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor llene la coordenada X");
+                    return;
+                }
+                if (!this.txtCoordenadaX.getText().trim().isEmpty() && this.txtCoordenadaY.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor llene la coordenada Y");
+                    return;
+                }
+                if (!this.txtCoordenadaX.getText().trim().isEmpty() && !this.txtCoordenadaY.getText().trim().isEmpty()) {
+                    coordenadaX = this.txtCoordenadaX.getText().trim();
+                    coordenadaY = this.txtCoordenadaY.getText().trim();
+                }
+            }
+            direccionAccidente = this.txtDireccionAccidente.getText().trim();
+            LocalidadComunaAccidente = this.txtLocalidadComunaAccidente.getText().trim();
+            carac1 = this.cbCaract1.getSelectedItem().toString().trim();
+            carac2 = this.cbCaract2.getSelectedItem().toString().trim();
+            carac3 = this.cbCaract3.getSelectedItem().toString().trim();
+            utilizacion = this.cbUtilizacion.getSelectedItem().toString().trim();
+            calzada = this.cbCalzada.getSelectedItem().toString().trim();
+            carril = this.cbCarril.getSelectedItem().toString().trim();
+            material = this.cbMaterial.getSelectedItem().toString().trim();
+            estado = this.cbEstado.getSelectedItem().toString().trim();
+            ilumunacion = this.cbIluminacion.getSelectedItem().toString().trim();
+            nipAgente = (this.txtAgente.getText().trim()).split(" - ")[0];
+            semaforo = this.cbSemaforo.getSelectedItem().toString().trim();
+            senial = this.txtSenial.getText().trim();
+
+            if (this.cbDisminucion.getSelectedIndex() == 11) {
+                disminucion = this.cbDisminucion.getSelectedItem().toString().trim() + " - " + this.txtDisminucionVisual.getText().trim();
+            } else {
+                disminucion = this.cbDisminucion.getSelectedItem().toString().trim();
+            }
+
+            if (this.cbDemarcacion.getSelectedIndex() == 11) {
+                demarcacion = this.cbDemarcacion.getSelectedItem().toString().trim() + " - " + this.txtDemarcacion.getText().trim();
+            } else {
+                demarcacion = this.cbDemarcacion.getSelectedItem().toString().trim();
+            }
+
+            numHeridos = Integer.parseInt(this.spnHeridos.getValue().toString());
+            numMuertos = Integer.parseInt(this.spnMuertos.getValue().toString());
+
+            if (this.controladorAccidente.registrar(fechaAccidente, tipoGravedad,
+                    claseAccidente, choqueCon, objetoFijo, areaAccidente,
+                    sectorAccidente, zonaAccidente, disenioAccidente, tiempo,
+                    coordenadaX, coordenadaY, direccionAccidente, LocalidadComunaAccidente,
+                    carac1, carac2, carac3, utilizacion, calzada, carril, material, estado,
+                    condicion, ilumunacion, nipAgente, disminucion, semaforo, senial, demarcacion,
+                    numHeridos, numMuertos, id, croquis)) {
+
+                JOptionPane.showMessageDialog(null, "Se ha guardado la información exitosamente");
+
+                if (JOptionPane.showConfirmDialog(null, "¿Desea añadir algun anexo a este informe?") == 0) {
+                    this.btnAniadirVehiculos.setEnabled(true);
+                    this.btnAniadirTestigos.setEnabled(true);
+                    this.btnRegistrar.setEnabled(false);
+                    this.btnPasarAEditar.setEnabled(false);
+                    this.idInforme = id;
+                } else {
+                    this.limpiarCampos();
+                }
+                this.listarInformes();
+            } else {
+                JOptionPane.showMessageDialog(null, "Hubo un error al guardar la información");
+            }
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        this.btnModificar.setEnabled(true);
-        this.btnRegistrar.setEnabled(false);
-        this.btnAniadirVehiculos.setEnabled(true);
-        this.btnAniadirTestigos.setEnabled(true);
-        this.btnActualizar.setEnabled(true);
-        this.btnBuscar.setEnabled(false);
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    private void btnPasarAEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasarAEditarActionPerformed
+        if (this.tblInformeAccidente.getSelectedRow() >= 0) {
+            this.btnModificar.setEnabled(true);
+            this.btnRegistrar.setEnabled(false);
+            this.btnAniadirVehiculos.setEnabled(true);
+            this.btnAniadirTestigos.setEnabled(true);
+            this.btnTerminarAnexos.setEnabled(true);
+            this.btnPasarAEditar.setEnabled(false);
+            this.idInforme = Integer.parseInt(this.tblInformeAccidente.getValueAt(this.tblInformeAccidente.getSelectedRow(), 0).toString().trim());
+            try {
+                this.llenearCampos(this.controladorAccidente.buscar(this.idInforme, "InformeAccidente"));
+            } catch (ParseException | UnsupportedEncodingException ex) {
+                JOptionPane.showMessageDialog(null, "Error cargando la información");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un informe de la tabla para poder pasar a editarlo");
+        }
+    }//GEN-LAST:event_btnPasarAEditarActionPerformed
 
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+    private void btnTerminarAnexosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarAnexosActionPerformed
         this.btnModificar.setEnabled(false);
         this.btnRegistrar.setEnabled(true);
         this.btnAniadirVehiculos.setEnabled(false);
         this.btnAniadirTestigos.setEnabled(false);
-        this.btnActualizar.setEnabled(false);
-        this.btnBuscar.setEnabled(true);
-    }//GEN-LAST:event_btnActualizarActionPerformed
+        this.btnTerminarAnexos.setEnabled(false);
+        this.btnPasarAEditar.setEnabled(true);
+        this.listarInformes();
+        this.limpiarCampos();
+        this.idInforme = 0;
+    }//GEN-LAST:event_btnTerminarAnexosActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        if (this.txtFechaAccidente.getDate() == null || this.cbGravedadAccidente.getSelectedIndex() == 0
+                || this.cbClaseAccidente.getSelectedIndex() == 0 || this.cbChoqueCon.getSelectedIndex() == 0
+                || this.cbObjetoFijo.getSelectedIndex() == 0 || Integer.parseInt(this.spnHeridos.getValue().toString()) < 0
+                || Integer.parseInt(this.spnMuertos.getValue().toString()) < 0 || this.cbAreaAccidente.getSelectedIndex() == 0
+                || this.cbSectorAccidente.getSelectedIndex() == 0 || this.cbZonaAccidente.getSelectedIndex() == 0
+                || this.cbDisenioAccidente.getSelectedIndex() == 0 || this.cbTiempoAccidente.getSelectedIndex() == 0
+                || this.txtDireccionAccidente.getText().trim().isEmpty() || this.txtLocalidadComunaAccidente.getText().trim().isEmpty()
+                || this.cbCaract1.getSelectedIndex() == 0 || this.cbCaract2.getSelectedIndex() == 0 || this.cbCaract3.getSelectedIndex() == 0
+                || this.cbUtilizacion.getSelectedIndex() == 0 || this.cbCalzada.getSelectedIndex() == 0 || this.cbCarril.getSelectedIndex() == 0
+                || this.cbMaterial.getSelectedIndex() == 0 || this.cbEstado.getSelectedIndex() == 0
+                || this.cbIluminacion.getSelectedIndex() == 0 || this.txtAgente.getText().trim().isEmpty() || this.cbDisminucion.getSelectedIndex() == 0
+                || (this.cbDisminucion.getSelectedIndex() == 11 && this.txtDisminucionVisual.getText().trim().isEmpty())
+                || this.cbSemaforo.getSelectedIndex() == 0 || this.txtSenial.getText().trim().isEmpty() || this.cbDemarcacion.getSelectedIndex() == 0
+                || (this.cbDemarcacion.getSelectedIndex() == 11 && this.txtDemarcacion.getText().trim().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Por favor llene los campos requeridos (*)");
+        } else {
+            Date fechaAccidente;
+            String tipoGravedad, claseAccidente, choqueCon, objetoFijo, areaAccidente, sectorAccidente, zonaAccidente, disenioAccidente,
+                    tiempo, coordenadaX = null, coordenadaY = null, direccionAccidente, LocalidadComunaAccidente, carac1, carac2, carac3, utilizacion,
+                    calzada, carril, material, estado, condicion = null, ilumunacion, nipAgente, disminucion, semaforo, senial,
+                    demarcacion;
+            int numHeridos, numMuertos, id = this.idInforme;
+
+            fechaAccidente = this.txtFechaAccidente.getDate();
+            tipoGravedad = this.cbGravedadAccidente.getSelectedItem().toString().trim();
+            claseAccidente = this.cbClaseAccidente.getSelectedItem().toString().trim();
+            choqueCon = this.cbChoqueCon.getSelectedItem().toString().trim();
+            objetoFijo = this.cbObjetoFijo.getSelectedItem().toString().trim();
+            areaAccidente = this.cbAreaAccidente.getSelectedItem().toString().trim();
+            sectorAccidente = this.cbSectorAccidente.getSelectedItem().toString().trim();
+            zonaAccidente = this.cbZonaAccidente.getSelectedItem().toString().trim();
+            disenioAccidente = this.cbDisenioAccidente.getSelectedItem().toString().trim();
+            tiempo = this.cbTiempoAccidente.getSelectedItem().toString().trim();
+            if (this.cbCondicion.getSelectedIndex() != 0) {
+                condicion = this.cbCondicion.getSelectedItem().toString().trim();
+            }
+            if (!this.txtCoordenadaX.getText().trim().isEmpty() || !this.txtCoordenadaY.getText().trim().isEmpty()) {
+                if (this.txtCoordenadaX.getText().trim().isEmpty() && !this.txtCoordenadaY.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor llene la coordenada X");
+                    return;
+                }
+                if (!this.txtCoordenadaX.getText().trim().isEmpty() && this.txtCoordenadaY.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor llene la coordenada Y");
+                    return;
+                }
+                if (!this.txtCoordenadaX.getText().trim().isEmpty() && !this.txtCoordenadaY.getText().trim().isEmpty()) {
+                    coordenadaX = this.txtCoordenadaX.getText().trim();
+                    coordenadaY = this.txtCoordenadaY.getText().trim();
+                }
+            }
+            direccionAccidente = this.txtDireccionAccidente.getText().trim();
+            LocalidadComunaAccidente = this.txtLocalidadComunaAccidente.getText().trim();
+            carac1 = this.cbCaract1.getSelectedItem().toString().trim();
+            carac2 = this.cbCaract2.getSelectedItem().toString().trim();
+            carac3 = this.cbCaract3.getSelectedItem().toString().trim();
+            utilizacion = this.cbUtilizacion.getSelectedItem().toString().trim();
+            calzada = this.cbCalzada.getSelectedItem().toString().trim();
+            carril = this.cbCarril.getSelectedItem().toString().trim();
+            material = this.cbMaterial.getSelectedItem().toString().trim();
+            estado = this.cbEstado.getSelectedItem().toString().trim();
+            ilumunacion = this.cbIluminacion.getSelectedItem().toString().trim();
+            nipAgente = (this.txtAgente.getText().trim()).split(" - ")[0];
+            semaforo = this.cbSemaforo.getSelectedItem().toString().trim();
+            senial = this.txtSenial.getText().trim();
+
+            if (this.cbDisminucion.getSelectedIndex() == 11) {
+                disminucion = this.cbDisminucion.getSelectedItem().toString().trim() + " - " + this.txtDisminucionVisual.getText().trim();
+            } else {
+                disminucion = this.cbDisminucion.getSelectedItem().toString().trim();
+            }
+
+            if (this.cbDemarcacion.getSelectedIndex() == 11) {
+                demarcacion = this.cbDemarcacion.getSelectedItem().toString().trim() + " - " + this.txtDemarcacion.getText().trim();
+            } else {
+                demarcacion = this.cbDemarcacion.getSelectedItem().toString().trim();
+            }
+
+            numHeridos = Integer.parseInt(this.spnHeridos.getValue().toString());
+            numMuertos = Integer.parseInt(this.spnMuertos.getValue().toString());
+            
+            if (this.controladorAccidente.modificar(fechaAccidente, tipoGravedad,
+                    claseAccidente, choqueCon, objetoFijo, areaAccidente,
+                    sectorAccidente, zonaAccidente, disenioAccidente, tiempo,
+                    coordenadaX, coordenadaY, direccionAccidente, LocalidadComunaAccidente,
+                    carac1, carac2, carac3, utilizacion, calzada, carril, material, estado,
+                    condicion, ilumunacion, nipAgente, disminucion, semaforo, senial, demarcacion,
+                    numHeridos, numMuertos, id, croquis)) {
+
+                JOptionPane.showMessageDialog(null, "Se ha guardado la información exitosamente");
+
+                if (JOptionPane.showConfirmDialog(null, "¿Desea añadir algun anexo a este informe?") == 0) {
+                    this.btnAniadirVehiculos.setEnabled(true);
+                    this.btnAniadirTestigos.setEnabled(true);
+                    this.btnRegistrar.setEnabled(false);
+                    this.btnPasarAEditar.setEnabled(false);
+                } else {
+                    this.limpiarCampos();
+                    this.btnAniadirVehiculos.setEnabled(false);
+                    this.btnAniadirTestigos.setEnabled(false);
+                    this.btnRegistrar.setEnabled(true);
+                    this.btnPasarAEditar.setEnabled(true);
+                    this.btnModificar.setEnabled(false);
+                    this.btnTerminarAnexos.setEnabled(false);
+                }
+                this.listarInformes();
+            } else {
+                JOptionPane.showMessageDialog(null, "Hubo un error al modificar la información");
+            }
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
+        if (this.txtBusqueda.getText().trim().isEmpty()) {
+            this.listarInformes();
+        } else {
+            Map<String, String> campos = new HashMap<>();
+            campos.put("IA.TIPO_GRAVEDAD", this.txtBusqueda.getText());
+            campos.put("IA.FECHA_HORA", this.txtBusqueda.getText());
+            campos.put("IA.CLASE_ACCIDENTE", this.txtBusqueda.getText());
+            campos.put("IA.CHOQUE_CON", this.txtBusqueda.getText());
+            campos.put("IA.OBJETO_FIJO", this.txtBusqueda.getText());
+            campos.put("IA.NUMERO_MUERTOS", this.txtBusqueda.getText());
+            campos.put("IA.NUMERO_HERIDOS", this.txtBusqueda.getText());
+            this.controladorAccidente.listar(this.tblInformeAccidente, campos);
+        }
+    }//GEN-LAST:event_txtBusquedaKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAniadirCroquis;
     private javax.swing.JButton btnAniadirTestigos;
     private javax.swing.JButton btnAniadirVehiculos;
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnPasarAEditar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnTerminarAnexos;
     private javax.swing.JComboBox<String> cbAreaAccidente;
     private javax.swing.JComboBox<String> cbCalzada;
     private javax.swing.JComboBox<String> cbCaract1;
@@ -940,7 +1207,7 @@ public class pnlAccidente extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbDisenioAccidente;
     private javax.swing.JComboBox<String> cbDisminucion;
     private javax.swing.JComboBox<String> cbEstado;
-    private javax.swing.JComboBox<String> cbGavedadAccidente;
+    private javax.swing.JComboBox<String> cbGravedadAccidente;
     private javax.swing.JComboBox<String> cbIluminacion;
     private javax.swing.JComboBox<String> cbMaterial;
     private javax.swing.JComboBox<String> cbObjetoFijo;
@@ -978,6 +1245,7 @@ public class pnlAccidente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1001,6 +1269,7 @@ public class pnlAccidente extends javax.swing.JPanel {
     private javax.swing.JSpinner spnMuertos;
     private javax.swing.JTable tblInformeAccidente;
     private javax.swing.JTextField txtAgente;
+    private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtCoordenadaX;
     private javax.swing.JTextField txtCoordenadaY;
     private javax.swing.JTextField txtCroquis;
@@ -1014,6 +1283,106 @@ public class pnlAccidente extends javax.swing.JPanel {
 
     private void llenarLista() {
         this.lstAgentes.setModel(this.controladorComboBox.modelList("Persona/Agentes", "nip", "nombreCompleto"));
+    }
+
+    private void limpiarCampos() {
+        this.txtFechaAccidente.setDate(null);
+        this.cbGravedadAccidente.setSelectedIndex(0);
+        this.cbClaseAccidente.setSelectedIndex(0);
+        this.cbChoqueCon.setSelectedIndex(0);
+        this.cbObjetoFijo.setSelectedIndex(0);
+        this.spnHeridos.setValue(0);
+        this.spnMuertos.setValue(0);
+        this.cbAreaAccidente.setSelectedIndex(0);
+        this.cbSectorAccidente.setSelectedIndex(0);
+        this.cbZonaAccidente.setSelectedIndex(0);
+        this.cbDisenioAccidente.setSelectedIndex(0);
+        this.cbTiempoAccidente.setSelectedIndex(0);
+        this.txtCoordenadaX.setText("");
+        this.txtCoordenadaY.setText("");
+        this.txtDireccionAccidente.setText("");
+        this.txtLocalidadComunaAccidente.setText("");
+        this.txtAgente.setText("");
+        this.llenarLista();
+        this.cbCaract1.setSelectedIndex(0);
+        this.cbCaract2.setSelectedIndex(0);
+        this.cbCaract3.setSelectedIndex(0);
+        this.cbUtilizacion.setSelectedIndex(0);
+        this.cbCalzada.setSelectedIndex(0);
+        this.cbCarril.setSelectedIndex(0);
+        this.cbMaterial.setSelectedIndex(0);
+        this.cbEstado.setSelectedIndex(0);
+        this.cbCondicion.setSelectedIndex(0);
+        this.cbIluminacion.setSelectedIndex(0);
+        this.txtCroquis.setText("");
+        this.cbDisminucion.setSelectedIndex(0);
+        this.txtDisminucionVisual.setText("");
+        this.cbSemaforo.setSelectedIndex(0);
+        this.txtSenial.setText("");
+        this.cbDemarcacion.setSelectedIndex(0);
+        this.txtDemarcacion.setText("");
+    }
+
+    private void llenearCampos(JSONObject obj) throws ParseException, UnsupportedEncodingException {
+        this.txtFechaAccidente.setDate((new SimpleDateFormat("yyyy-MM-dd")).parse(((obj.get("fechaHora").toString()).split("T"))[0]));
+        this.cbGravedadAccidente.setSelectedItem(URLDecoder.decode(obj.get("tipoGravedad").toString(), "UTF-8"));
+        this.cbClaseAccidente.setSelectedItem(URLDecoder.decode(obj.get("claseAccidente").toString(), "UTF-8"));
+        this.cbChoqueCon.setSelectedItem(URLDecoder.decode(obj.get("choqueCon").toString(), "UTF-8"));
+        this.cbObjetoFijo.setSelectedItem(URLDecoder.decode(obj.get("objetoFijo").toString(), "UTF-8"));
+        this.spnHeridos.setValue(Integer.parseInt(obj.get("numeroHeridos").toString()));
+        this.spnMuertos.setValue(Integer.parseInt(obj.get("numeroMuertos").toString()));
+        JSONObject caracLugar = (JSONObject) obj.get("caracteristicaLugar");
+        this.cbAreaAccidente.setSelectedItem(caracLugar.get("areaId").toString());
+        this.cbSectorAccidente.setSelectedItem(caracLugar.get("sectorId").toString());
+        this.cbZonaAccidente.setSelectedItem(caracLugar.get("zonaId").toString());
+        this.cbDisenioAccidente.setSelectedItem(caracLugar.get("disenioId").toString());
+        this.cbTiempoAccidente.setSelectedItem(caracLugar.get("tiempoId").toString());
+        JSONObject lugar = (JSONObject) obj.get("lugar");
+        if (lugar.get("coordenandaX").toString() != null && lugar.get("coordenadaY").toString() != null) {
+            this.txtCoordenadaX.setText(lugar.get("coordenandaX").toString());
+            this.txtCoordenadaY.setText(lugar.get("coordenadaY").toString());
+        }
+        this.txtDireccionAccidente.setText(lugar.get("direccion").toString());
+        this.txtLocalidadComunaAccidente.setText(lugar.get("localidadComuna").toString());
+        JSONObject agente = (JSONObject) obj.get("agente");
+        this.controladorComboBox.modeloListaFiltrado(this.lstAgentes, agente.get("nip").toString());
+        this.lstAgentes.setSelectedIndex(0);
+        this.txtAgente.setText(this.lstAgentes.getSelectedValue());
+        JSONObject caracVia = (JSONObject) obj.get("caracteristicaVia");
+        this.cbCaract1.setSelectedItem(caracVia.get("caracGeometricaVia1").toString());
+        this.cbCaract2.setSelectedItem(caracVia.get("caracGeometricaVia2").toString());
+        this.cbCaract3.setSelectedItem(caracVia.get("caracGeometricaVia3").toString());
+        this.cbUtilizacion.setSelectedItem(caracVia.get("utilizacion").toString());
+        this.cbCalzada.setSelectedItem(caracVia.get("calzada").toString());
+        this.cbCarril.setSelectedItem(caracVia.get("carril").toString());
+        this.cbMaterial.setSelectedItem(caracVia.get("material").toString());
+        this.cbEstado.setSelectedItem(caracVia.get("estado").toString());
+        if (caracVia.get("condicion").toString() != null) {
+            this.cbCondicion.setSelectedItem(caracVia.get("condicion").toString());
+        }
+        this.cbIluminacion.setSelectedItem(caracVia.get("iluminacion").toString());
+        String disminu = caracVia.get("disminucionVisual").toString();
+        if (disminu.contains(" - ")) {
+            this.cbDisminucion.setSelectedItem(disminu.split(" - ")[0]);
+            this.txtDisminucionVisual.setText(disminu.split(" - ")[1]);
+        } else {
+            this.cbDisminucion.setSelectedItem(disminu);
+            this.txtDisminucionVisual.setText("");
+        }
+        this.cbSemaforo.setSelectedItem(caracVia.get("controlSemaforo").toString());
+        this.txtSenial.setText(caracVia.get("controlSenales").toString());
+        String demarca = caracVia.get("controlDemarcacion").toString();
+        if (demarca.contains(" - ")) {
+            this.cbDemarcacion.setSelectedItem(demarca.split(" - ")[0]);
+            this.txtDemarcacion.setText(demarca.split(" - ")[1]);
+        } else {
+            this.cbDemarcacion.setSelectedItem(demarca);
+            this.txtDemarcacion.setText("");
+        }
+    }
+
+    private void listarInformes() {
+        this.controladorAccidente.listar(this.tblInformeAccidente, null);
     }
 
 }

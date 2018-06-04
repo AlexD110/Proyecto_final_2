@@ -173,5 +173,77 @@ public class CtlVehiculo extends ControladorAbstracto {
             return null;
         }
     }
+    
+    //Mtodos añadidos
+    
+    public int asignarIdVehiculoAfectado(){
+        return this.asignarId("VehiculosAfectados");
+    }
+    
+    public boolean guardarVehiculoAfectado(String placaVehiculo, String movilizado,
+            String fallas, String disposicion, String lugar, String version,
+            char propietario, int id,int idInforme){
+        try {
+
+            return (boolean) ((JSONObject) (new JSONParser().parse(this.registrar(
+                    this.crearJson(placaVehiculo, movilizado, fallas, disposicion,
+                            lugar, version, propietario, id, idInforme),
+                    "VehiculosAfectados").readEntity(String.class)))).get("Resultado");
+
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+    
+    public DefaultTableModel listarVehiculosAfectados(int idInforme) {
+        String[] lista = {"id","Placa", "Modelo", "Linea", "Marca", "Clase vehiculo", "Tipo vehiculo", "Nacionalidad","Falla en"};
+        DefaultTableModel modelo = new DefaultTableModel(new Object[][]{}, lista);
+        try {
+            String response = this.traerlistar("VehiculosAfectados/Informe/"+idInforme);
+            JSONArray vehiculos = ((JSONArray) (new JSONParser().parse(response)));
+            for (int i = 0; i < vehiculos.size(); i++) {
+                JSONObject vehisuloAfectado = (JSONObject) vehiculos.get(i);
+                JSONObject vehisulo2 = (JSONObject) vehisuloAfectado.get("vehiculoPlaca");
+                modelo.addRow(new Object[]{
+                    vehisuloAfectado.get("id").toString(),
+                    vehisulo2.get("placa").toString(),
+                    vehisulo2.get("modelo").toString(),
+                    vehisulo2.get("linea").toString(),
+                    vehisulo2.get("marca").toString(),
+                    vehisulo2.get("claseVehiculo").toString(),
+                    vehisulo2.get("tipoVehiculo").toString(),
+                    vehisulo2.get("nacionalidad").toString(),
+                    vehisuloAfectado.get("fallaEn").toString()
+
+                });
+            }
+        } catch (ParseException ex) {
+            System.out.println("[Error] : " + ex);
+        }
+        return modelo;
+    }
+
+    private String crearJson(String placaVehiculo, String movilizado, String fallas, String disposicion, String lugar, String version,
+            char propietario, int id,int idInforme) {
+        try {
+            JSONObject request = new JSONObject(), informe;
+            request.put("disposicion", disposicion);
+            request.put("fallaEn", fallas);
+            request.put("id", id);
+            informe = ((JSONObject) (new JSONParser().parse(traerlistar("InformeAccidente/" + idInforme))));
+            request.put("informeAccidenteTransitoId", informe);
+            request.put("inmovilizacion", movilizado);
+            request.put("lugarImpacto", lugar);
+            request.put("prpietarioMismoConductor", propietario+"");
+            request.put("vehiculoPlaca", ((JSONObject) (new JSONParser().parse(traerlistar("Vehiculo/" + placaVehiculo)))));
+            request.put("version", version);
+
+            return request.toString();
+        } catch (ParseException ex) {
+            return null;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 
 }

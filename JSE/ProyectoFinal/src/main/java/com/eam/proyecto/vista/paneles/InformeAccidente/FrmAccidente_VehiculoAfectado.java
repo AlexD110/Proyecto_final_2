@@ -13,14 +13,16 @@ public class FrmAccidente_VehiculoAfectado extends java.awt.Dialog {
 
     private final JFrame padre;
     private final CtlVehiculo controladorVehiculo;
-    private int idVehiculo;
+    private final int idInforme;
 
     public FrmAccidente_VehiculoAfectado(JFrame parent, boolean modal, int idAccidenteTransito) {
         super(parent, modal);
         initComponents();
         this.padre = parent;
+        this.idInforme = idAccidenteTransito;
         this.controladorVehiculo = new CtlVehiculo();
         this.listarVehiculos();
+        this.tblVehiculosAfectados.setModel(this.controladorVehiculo.listarVehiculosAfectados(this.idInforme));
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -30,6 +32,9 @@ public class FrmAccidente_VehiculoAfectado extends java.awt.Dialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVehiculos = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblVehiculosAfectados = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -50,9 +55,9 @@ public class FrmAccidente_VehiculoAfectado extends java.awt.Dialog {
         txtVersion = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        btnAniadirPerjudicados = new javax.swing.JButton();
-        btnTerminar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         btnAniadirVehiculo = new javax.swing.JButton();
+        btnAniadorPerjudicados = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         txtBuscarVehiculo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -80,13 +85,34 @@ public class FrmAccidente_VehiculoAfectado extends java.awt.Dialog {
         ));
         jScrollPane1.setViewportView(tblVehiculos);
 
+        tblVehiculosAfectados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblVehiculosAfectados);
+
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Vehiculos afectados");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -94,6 +120,10 @@ public class FrmAccidente_VehiculoAfectado extends java.awt.Dialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -151,13 +181,13 @@ public class FrmAccidente_VehiculoAfectado extends java.awt.Dialog {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPlacaVehiculo)
                     .addComponent(txtMovilizado)
                     .addComponent(cbPropietario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbFallas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtDisposicion)
                     .addComponent(txtLugar)
                     .addComponent(txtVersion)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -167,8 +197,8 @@ public class FrmAccidente_VehiculoAfectado extends java.awt.Dialog {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9))
-                        .addGap(0, 49, Short.MAX_VALUE))
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 50, Short.MAX_VALUE))
+                    .addComponent(txtPlacaVehiculo))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -220,20 +250,17 @@ public class FrmAccidente_VehiculoAfectado extends java.awt.Dialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(1, 20, 30));
 
-        btnAniadirPerjudicados.setText("Añadir Perjudicados");
-        btnAniadirPerjudicados.setEnabled(false);
-        btnAniadirPerjudicados.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setText("Salir");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAniadirPerjudicadosActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
-
-        btnTerminar.setText(" Terminar Anexo");
 
         btnAniadirVehiculo.setText(">>");
         btnAniadirVehiculo.addActionListener(new java.awt.event.ActionListener() {
@@ -242,16 +269,23 @@ public class FrmAccidente_VehiculoAfectado extends java.awt.Dialog {
             }
         });
 
+        btnAniadorPerjudicados.setText("Añadir Perjudicados");
+        btnAniadorPerjudicados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAniadorPerjudicadosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAniadirPerjudicados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTerminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAniadirVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAniadorPerjudicados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAniadirVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -260,10 +294,10 @@ public class FrmAccidente_VehiculoAfectado extends java.awt.Dialog {
                 .addGap(167, 167, 167)
                 .addComponent(btnAniadirVehiculo)
                 .addGap(18, 18, 18)
-                .addComponent(btnAniadirPerjudicados)
-                .addGap(18, 18, 18)
-                .addComponent(btnTerminar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAniadorPerjudicados)
+                .addGap(59, 59, 59))
         );
 
         jPanel5.setBackground(new java.awt.Color(5, 117, 154));
@@ -357,26 +391,20 @@ public class FrmAccidente_VehiculoAfectado extends java.awt.Dialog {
         dispose();
     }//GEN-LAST:event_closeDialog
 
-    private void btnAniadirPerjudicadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAniadirPerjudicadosActionPerformed
-        FrmAccidente_Perjudicados_Testigos ventanaPerjudicados = new FrmAccidente_Perjudicados_Testigos(this.padre, true, this.idVehiculo, 0);
-        ventanaPerjudicados.setLocationRelativeTo(null);
-        ventanaPerjudicados.setVisible(true);
-    }//GEN-LAST:event_btnAniadirPerjudicadosActionPerformed
-
     private void btnAniadirVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAniadirVehiculoActionPerformed
         if (tblVehiculos.getSelectedRow() >= 0) {
             txtPlacaVehiculo.setText(this.tblVehiculos.getValueAt(this.tblVehiculos.getSelectedRow(), 0).toString());
             this.btnGuardar.setEnabled(true);
-        }else{
-            JOptionPane.showMessageDialog(this.padre, "Debe seleccionar un vehiculo de la tabla");
+        } else {
+            JOptionPane.showMessageDialog(this.padre, "Debe seleccionar un vehiculo de la tabla de vehiculos");
         }
     }//GEN-LAST:event_btnAniadirVehiculoActionPerformed
 
     private void txtBuscarVehiculoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarVehiculoKeyReleased
         if (this.txtBuscarVehiculo.getText().trim().isEmpty()) {
             this.listarVehiculos();
-        }else{
-            Map<String,String> campos = new HashMap<>();
+        } else {
+            Map<String, String> campos = new HashMap<>();
             campos.put("Placa", txtBuscarVehiculo.getText());
             campos.put("Modelo", txtBuscarVehiculo.getText());
             campos.put("Marca", txtBuscarVehiculo.getText());
@@ -393,18 +421,65 @@ public class FrmAccidente_VehiculoAfectado extends java.awt.Dialog {
     }//GEN-LAST:event_txtBuscarVehiculoKeyReleased
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        this.btnAniadirPerjudicados.setEnabled(true);
+        if (this.txtMovilizado.getText().trim().isEmpty() || this.cbPropietario.getSelectedIndex() == 0
+                || this.cbFallas.getSelectedIndex() == 0 || this.txtDisposicion.getText().trim().isEmpty()
+                || this.txtLugar.getText().trim().isEmpty() || this.txtVersion.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor llene los campos requeridos (*)");
+        } else {
+            String placaVehiculo, movilizado, fallas, disposicion, lugar, version;
+            char propietario;
+            int idVehiculoAfectado = this.controladorVehiculo.asignarIdVehiculoAfectado();
+
+            placaVehiculo = this.txtPlacaVehiculo.getText().trim();
+            movilizado = this.txtMovilizado.getText().trim();
+            propietario = this.cbPropietario.getSelectedItem().toString().trim().charAt(0);
+            fallas = this.cbFallas.getSelectedItem().toString().trim();
+            disposicion = this.txtDisposicion.getText().trim();
+            lugar = this.txtLugar.getText().trim();
+            version = this.txtVersion.getText().trim();
+
+            if (this.controladorVehiculo.guardarVehiculoAfectado(placaVehiculo, movilizado,
+                    fallas, disposicion, lugar, version, propietario, idVehiculoAfectado, this.idInforme)) {
+                JOptionPane.showMessageDialog(null, "Se ha guardado el vehiculo afectado");
+                if (JOptionPane.showConfirmDialog(null, "¿Desea añadir perjudicados a este vehiculo?") == 0) {
+                    FrmAccidente_Perjudicados_Testigos ventanaPerjudicados = new FrmAccidente_Perjudicados_Testigos(this.padre, true, idVehiculoAfectado, 0);
+                    ventanaPerjudicados.setLocationRelativeTo(null);
+                    ventanaPerjudicados.setVisible(true);
+                }
+                this.limpiarCampos();
+            } else {
+                JOptionPane.showMessageDialog(null, "Hubo un error al guardar la información");
+            }
+            this.tblVehiculosAfectados.setModel(this.controladorVehiculo.listarVehiculosAfectados(this.idInforme));
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnAniadorPerjudicadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAniadorPerjudicadosActionPerformed
+        if (this.tblVehiculosAfectados.getSelectedRow() >= 0) {
+            int idVehiculoAfectado = Integer.parseInt(this.tblVehiculosAfectados.getValueAt(this.tblVehiculosAfectados.getSelectedRow(), 0).toString());
+
+            FrmAccidente_Perjudicados_Testigos ventanaPerjudicados = new FrmAccidente_Perjudicados_Testigos(this.padre, true, idVehiculoAfectado, 0);
+            ventanaPerjudicados.setLocationRelativeTo(null);
+            ventanaPerjudicados.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this.padre, "Debe seleccionar un vehiculo de la tabla de vehiculos afectados");
+        }
+    }//GEN-LAST:event_btnAniadorPerjudicadosActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAniadirPerjudicados;
     private javax.swing.JButton btnAniadirVehiculo;
+    private javax.swing.JButton btnAniadorPerjudicados;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnTerminar;
     private javax.swing.JComboBox<String> cbFallas;
     private javax.swing.JComboBox<String> cbPropietario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -420,7 +495,9 @@ public class FrmAccidente_VehiculoAfectado extends java.awt.Dialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblVehiculos;
+    private javax.swing.JTable tblVehiculosAfectados;
     private javax.swing.JTextField txtBuscarVehiculo;
     private javax.swing.JTextField txtDisposicion;
     private javax.swing.JTextField txtLugar;
@@ -429,7 +506,18 @@ public class FrmAccidente_VehiculoAfectado extends java.awt.Dialog {
     private javax.swing.JTextField txtVersion;
     // End of variables declaration//GEN-END:variables
 
-    private void listarVehiculos(){
+    private void listarVehiculos() {
         this.tblVehiculos.setModel(this.controladorVehiculo.listar("Vehiculo"));
+    }
+
+    private void limpiarCampos() {
+        this.txtPlacaVehiculo.setText("");
+        this.txtMovilizado.setText("");
+        this.cbPropietario.setSelectedIndex(0);
+        this.cbFallas.setSelectedIndex(0);
+        this.txtDisposicion.setText("");
+        this.txtLugar.setText("");
+        this.txtVersion.setText("");
+        this.btnGuardar.setEnabled(false);
     }
 }

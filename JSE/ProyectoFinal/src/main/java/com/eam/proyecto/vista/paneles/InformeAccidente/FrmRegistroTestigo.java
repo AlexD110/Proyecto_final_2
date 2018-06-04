@@ -1,18 +1,30 @@
 package com.eam.proyecto.vista.paneles.InformeAccidente;
 
+import com.eam.proyecto.controlador.CtlPersona;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
  * @author Daryl Ospina
  */
 public class FrmRegistroTestigo extends java.awt.Dialog {
+    
+    private final String nipPersona;
+    private final int idInforme;
+    private final CtlPersona controladorPersona;
+    private final JTable tblTestigos;
 
     public FrmRegistroTestigo(java.awt.Frame parent, boolean modal,JTable tblTestigos,String nipPersona,int idInforme) {
         super(parent, modal);
         initComponents();
         
+        this.nipPersona = nipPersona;
+        this.idInforme = idInforme;
+        
         this.txtTestigo.setText(nipPersona);
         this.txtTestimonio.setLineWrap(true);
+        this.controladorPersona = new CtlPersona();
+        this.tblTestigos = tblTestigos;
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -53,6 +65,11 @@ public class FrmRegistroTestigo extends java.awt.Dialog {
         });
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nip del testigo:");
@@ -146,6 +163,22 @@ public class FrmRegistroTestigo extends java.awt.Dialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        if (this.txtTestimonio.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor escriba el testimonio del testigo");
+        }else{
+            String testimonio = this.txtTestimonio.getText().trim();
+            
+            if (this.controladorPersona.guardarTestigo(this.idInforme, this.nipPersona, testimonio)) {
+                JOptionPane.showMessageDialog(null, "Se ha guardado el testigo correctamente");
+                this.tblTestigos.setModel(this.controladorPersona.listarTestigos(this.idInforme));
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Hubo un error al guardar la información");
+            }
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

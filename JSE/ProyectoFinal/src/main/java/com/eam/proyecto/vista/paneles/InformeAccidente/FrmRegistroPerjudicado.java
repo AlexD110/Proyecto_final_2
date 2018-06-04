@@ -1,5 +1,7 @@
 package com.eam.proyecto.vista.paneles.InformeAccidente;
 
+import com.eam.proyecto.controlador.CtlPersona;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -7,10 +9,19 @@ import javax.swing.JTable;
  */
 public class FrmRegistroPerjudicado extends java.awt.Dialog {
     
-    public FrmRegistroPerjudicado(java.awt.Frame parent, boolean modal,JTable tblPerjidicados,String nipPersona) {
+    private final JTable tblPerjudicados;
+    private final String nipPersona;
+    private final int idVehiculoAfectado;
+    private final CtlPersona controladorPersona;
+    
+    public FrmRegistroPerjudicado(java.awt.Frame parent, boolean modal,JTable tblPerjidicados,String nipPersona,int idVehiculoAfectado) {
         super(parent, modal);
         initComponents();
+        this.tblPerjudicados = tblPerjidicados;
+        this.nipPersona = nipPersona;
+        this.idVehiculoAfectado = idVehiculoAfectado;
         this.txtPerjudicado.setText(nipPersona);
+        this.controladorPersona = new CtlPersona();
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -32,6 +43,8 @@ public class FrmRegistroPerjudicado extends java.awt.Dialog {
         btnCancelar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txtPerjudicado = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtCondicion = new javax.swing.JTextField();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -74,6 +87,11 @@ public class FrmRegistroPerjudicado extends java.awt.Dialog {
         cbGravedad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo de gravedad", "Muerto", "Herido" }));
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +104,9 @@ public class FrmRegistroPerjudicado extends java.awt.Dialog {
         jLabel7.setText("Nip del perjudicado:");
 
         txtPerjudicado.setEditable(false);
+
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Condición:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -101,6 +122,7 @@ public class FrmRegistroPerjudicado extends java.awt.Dialog {
                     .addComponent(cbCasco, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbSexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbGravedad, 0, 187, Short.MAX_VALUE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -108,9 +130,10 @@ public class FrmRegistroPerjudicado extends java.awt.Dialog {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtCondicion))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -141,6 +164,10 @@ public class FrmRegistroPerjudicado extends java.awt.Dialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbGravedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCondicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnGuardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCancelar)
@@ -164,8 +191,8 @@ public class FrmRegistroPerjudicado extends java.awt.Dialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -191,6 +218,34 @@ public class FrmRegistroPerjudicado extends java.awt.Dialog {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        if (this.cbTipoPerjudicado.getSelectedIndex() == 0
+                || this.cbCinturon.getSelectedIndex() == 0 || this.cbCasco.getSelectedIndex() == 0
+                || this.cbSexo.getSelectedIndex() == 0 || this.cbGravedad.getSelectedIndex() == 0
+                || this.txtCondicion.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor llene todos los campos");
+        }else{
+            String tipoPerjudicado,sexo,tipoGravedad,condicion;
+            char cinturon,casco;
+            
+            tipoPerjudicado = this.cbTipoPerjudicado.getSelectedItem().toString().trim();
+            sexo = this.cbSexo.getSelectedItem().toString().trim();
+            tipoGravedad = this.cbGravedad.getSelectedItem().toString().trim();
+            condicion = this.txtCondicion.getText().trim();
+            cinturon = this.cbCinturon.getSelectedItem().toString().trim().charAt(0);
+            casco = this.cbCasco.getSelectedItem().toString().trim().charAt(0);
+            
+            if (this.controladorPersona.guardarPerjudicado(this.nipPersona, tipoPerjudicado, sexo,
+                    tipoGravedad, condicion, cinturon, casco, this.idVehiculoAfectado)) {
+                JOptionPane.showMessageDialog(null, "Se ha guardado el perjudicado correctamente");
+                this.tblPerjudicados.setModel(this.controladorPersona.listarPerjudicados(this.idVehiculoAfectado));
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Hubo un erro al guardar la información");
+            }
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
@@ -206,8 +261,10 @@ public class FrmRegistroPerjudicado extends java.awt.Dialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField txtCondicion;
     private javax.swing.JTextField txtPerjudicado;
     // End of variables declaration//GEN-END:variables
 }

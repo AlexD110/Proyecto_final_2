@@ -47,27 +47,27 @@ public class CaracteristicaLugar implements Serializable {
     private BigDecimal id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "AREA_ID")
     private String areaId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "SECTOR_ID")
     private String sectorId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "ZONA_ID")
     private String zonaId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "DISENIO_ID")
     private String disenioId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "TIEMPO_ID")
     private String tiempoId;
     @JoinColumn(name = "ID", referencedColumnName = "ID", insertable = false, updatable = false)
@@ -138,6 +138,7 @@ public class CaracteristicaLugar implements Serializable {
         this.tiempoId = tiempoId;
     }
     
+    @XmlTransient
     public InformeAccidenteTransito getInformeAccidenteTransito() {
         return informeAccidenteTransito;
     }

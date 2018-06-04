@@ -30,7 +30,7 @@ import javax.ws.rs.core.Response;
 @Path("InformeAccidente")
 public class ServicioInformeAccidente extends EstructuraRestFulNegocio<InformeAccidenteTransito> {
     
-    private InformeAccidenteNegocio nego = new InformeAccidenteNegocio(InformeAccidenteTransito.class);
+    private final InformeAccidenteNegocio nego = new InformeAccidenteNegocio(InformeAccidenteTransito.class);
     
     public ServicioInformeAccidente() {
         super(InformeAccidenteTransito.class);
@@ -63,7 +63,8 @@ public class ServicioInformeAccidente extends EstructuraRestFulNegocio<InformeAc
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public InformeAccidenteTransito find(@PathParam("id") BigDecimal id) {
-        return super.buscar(id);
+        String consulta = "SELECT IA.* FROM Informe_accidente_transito IA WHERE IA.Id="+id.intValue();
+        return this.nego.actualizarListar(consulta).get(0);
     }
     
     @GET
@@ -71,7 +72,7 @@ public class ServicioInformeAccidente extends EstructuraRestFulNegocio<InformeAc
     @Produces({MediaType.APPLICATION_JSON})
     public List<InformeAccidenteTransito> buscarInforme(@PathParam("consulta") String consulta) {
         try {
-            return nego.cargarConConsulta(URLDecoder.decode(consulta,"UTF-8"));
+            return this.nego.actualizarListar(URLDecoder.decode(consulta,"UTF-8"));
         } catch (UnsupportedEncodingException ex) {
             System.out.println("[Error] : "+ex);
         }
@@ -82,7 +83,7 @@ public class ServicioInformeAccidente extends EstructuraRestFulNegocio<InformeAc
     @Override
     @Produces({MediaType.APPLICATION_JSON})
     public List<InformeAccidenteTransito> listar() {
-        return super.listar();
+        return this.nego.actualizarListar("SELECT IA.* FROM Informe_accidente_transito IA");
     }
 
     @GET

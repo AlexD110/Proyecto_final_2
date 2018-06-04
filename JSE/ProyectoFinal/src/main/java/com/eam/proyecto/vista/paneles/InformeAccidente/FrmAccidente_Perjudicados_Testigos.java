@@ -14,6 +14,7 @@ public class FrmAccidente_Perjudicados_Testigos extends java.awt.Dialog {
     private final CtlPersona controladorPersona;
     private final JFrame padre;
     private final int tipoFrm;
+    private final int idPerteneciente;
 
     public FrmAccidente_Perjudicados_Testigos(JFrame parent, boolean modal, int idPerteneciente, int tipoFrm) {
         super(parent, modal);
@@ -21,16 +22,19 @@ public class FrmAccidente_Perjudicados_Testigos extends java.awt.Dialog {
 
         this.padre = parent;
         this.tipoFrm = tipoFrm;
+        this.idPerteneciente = idPerteneciente;
+        this.controladorPersona = new CtlPersona();
 
         if (this.tipoFrm == 0) {
             this.lblTitulo.setText("Añadir Perjudicados");
             this.lblTituloTabla.setText("Perjudicados");
+            this.tblPerjidicadosTestigos.setModel(this.controladorPersona.listarPerjudicados(idPerteneciente));
         } else {
             this.lblTitulo.setText("Añadir Testigos");
             this.lblTituloTabla.setText("Testigos");
+            this.tblPerjidicadosTestigos.setModel(this.controladorPersona.listarTestigos(idPerteneciente));
         }
 
-        this.controladorPersona = new CtlPersona();
 
         this.listarPersonas();
     }
@@ -124,7 +128,7 @@ public class FrmAccidente_Perjudicados_Testigos extends java.awt.Dialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -145,6 +149,11 @@ public class FrmAccidente_Perjudicados_Testigos extends java.awt.Dialog {
         });
 
         btnTerminarAnexo.setText("Terminar");
+        btnTerminarAnexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminarAnexoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -224,7 +233,7 @@ public class FrmAccidente_Perjudicados_Testigos extends java.awt.Dialog {
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(6, 6, 6)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTituloTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                            .addComponent(lblTituloTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -288,11 +297,11 @@ public class FrmAccidente_Perjudicados_Testigos extends java.awt.Dialog {
         if (this.tblPersonas.getSelectedRow() >= 0) {
             String nipPersona = this.tblPersonas.getValueAt(this.tblPersonas.getSelectedRow(), 2).toString();
             if (this.tipoFrm == 0) {
-                FrmRegistroPerjudicado ventanaPerjudicado = new FrmRegistroPerjudicado(this.padre, true, this.tblPerjidicadosTestigos, nipPersona);
+                FrmRegistroPerjudicado ventanaPerjudicado = new FrmRegistroPerjudicado(this.padre, true, this.tblPerjidicadosTestigos, nipPersona,this.idPerteneciente);
                 ventanaPerjudicado.setLocationRelativeTo(null);
                 ventanaPerjudicado.setVisible(true);
             } else {
-                FrmRegistroTestigo ventanaTestigo = new FrmRegistroTestigo(this.padre, true, this.tblPerjidicadosTestigos, nipPersona, 0);
+                FrmRegistroTestigo ventanaTestigo = new FrmRegistroTestigo(this.padre, true, this.tblPerjidicadosTestigos, nipPersona, this.idPerteneciente);
                 ventanaTestigo.setLocationRelativeTo(null);
                 ventanaTestigo.setVisible(true);
             }
@@ -304,6 +313,10 @@ public class FrmAccidente_Perjudicados_Testigos extends java.awt.Dialog {
             }
         }
     }//GEN-LAST:event_btnAniadirPerjudicadoTestigoActionPerformed
+
+    private void btnTerminarAnexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarAnexoActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnTerminarAnexoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAniadirPerjudicadoTestigo;
