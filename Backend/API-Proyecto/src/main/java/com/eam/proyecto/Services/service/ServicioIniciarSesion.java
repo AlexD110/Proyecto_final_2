@@ -45,6 +45,7 @@ public class ServicioIniciarSesion {
 
             boolean acceso = false;
             String rol = "";
+            String nombreUsu = "";
 
             for (Administrador admin : admins) {
                 if (admin.getUsuario().equals(obj.get("nombreUsuario").toString())
@@ -52,6 +53,7 @@ public class ServicioIniciarSesion {
                     acceso = true;
                     rol = "Administrador";
                     cedula = "No posee cedula";
+                    nombreUsu = "No posee nombre usuario";
                 }
             }
 
@@ -61,12 +63,14 @@ public class ServicioIniciarSesion {
                     acceso = true;
                     rol = usu.getTipoUsuario();
                     cedula = usu.getPersonaNip().getNip();
+                    nombreUsu = usu.getNombreUsuario();
                 }
             }
 
             objRespuesta.put("Acceso", acceso);
             objRespuesta.put("Rol", rol);
             objRespuesta.put("Cedula", cedula);
+            objRespuesta.put("NombreUsu", nombreUsu);
             return Herramientas.construirResponse(objRespuesta.toString());
 
         } catch (UnsupportedEncodingException | ParseException ex) {

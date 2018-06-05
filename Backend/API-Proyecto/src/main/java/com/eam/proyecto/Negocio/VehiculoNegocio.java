@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.eam.proyecto.Negocio;
 
 import com.eam.proyecto.DTO.Vehiculo;
 import java.util.ArrayList;
 
-/**
- *
- * @author Fabian
- */
+
 public class VehiculoNegocio extends Negocio<Vehiculo> {
 
     public VehiculoNegocio(Class<Vehiculo> entityClass) {
@@ -23,6 +16,11 @@ public class VehiculoNegocio extends Negocio<Vehiculo> {
                 + "ORDER BY ID DESC ;";
 
         return new ArrayList(this.dao.cargarConsulta(consulta, null));
+    }
+
+    
+    public ArrayList<Vehiculo> cargarConConsulta(String consulta){
+        return new ArrayList<>(this.dao.cargarConsulta(consulta, Vehiculo.class));
     }
 
 }

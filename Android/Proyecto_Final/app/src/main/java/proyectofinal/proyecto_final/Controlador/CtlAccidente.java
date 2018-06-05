@@ -37,18 +37,25 @@ public class CtlAccidente extends Cliente {
         this.activity = activity;
     }
 
-    public void registrar(String tipoGravedad,String claseAccidente,String choqueCon,String objetoFijo,
-            Date fecha,int muertos,int heridos,String nipAgente,String area,String sector,String zona,String disenio,String tiempo){
+    public void registrar(Date fechaAccidente,
+                          String tipoGravedad, String claseAccidente, String choqueCon, String objetoFijo, String areaAccidente, String sectorAccidente,
+                          String zonaAccidente, String disenioAccidente,
+                          String tiempo, String coordenadaX, String coordenadaY, String direccionAccidente, String LocalidadComunaAccidente,
+                          String carac1, String carac2, String carac3, String utilizacion,
+                          String calzada, String carril, String material, String estado, String condicion, String ilumunacion, String nipAgente,
+                          String disminucion, String semaforo, String senial,
+                          String demarcacion, int numHeridos, int numMuertos){
         try {
+            //Accidente
             JSONObject request = new JSONObject(),agente = new JSONObject();
 
             int id = this.asignarId("InformeAccidente");
 
             request.put("choqueCon", choqueCon);
-            request.put("fechaHora", (new SimpleDateFormat("yyyy-MM-dd").format(fecha))+"T00:00:00-05:00");
+            request.put("fechaHora", (new SimpleDateFormat("yyyy-MM-dd").format(fechaAccidente))+"T00:00:00-05:00");
             request.put("id", id);
-            request.put("numeroHeridos", heridos);
-            request.put("numeroMuertos", muertos);
+            request.put("numeroHeridos", numHeridos);
+            request.put("numeroMuertos", numMuertos);
             request.put("objetoFijo", objetoFijo);
             agente = this.traerBD("Persona",nipAgente);
             request.put("agente", agente);
@@ -57,18 +64,55 @@ public class CtlAccidente extends Cliente {
 
             this.registrar("El InformeAccidente",request,activity,false);
 
+            //Caracteristicas lugar
             request = new JSONObject();
             JSONObject informe = this.traerBD("InformeAccidente",id);
 
-            request.put("areaId", area);
-            request.put("disenioId", disenio);
+            request.put("areaId", areaAccidente);
+            request.put("disenioId", disenioAccidente);
             request.put("id", id);
-            request.put("sectorId", sector);
+            request.put("sectorId", sectorAccidente);
             request.put("tiempoId", tiempo);
-            request.put("zonaId", zona);
+            request.put("zonaId", zonaAccidente);
             request.put("informeAccidenteTransito", informe);
 
             this.registrar("Las CaracteristicasLugar",request,activity,true);
+
+            //Lugar
+            request = new JSONObject();
+            if (coordenadaX != null && coordenadaY != null) {
+                request.put("coordenadaY", coordenadaY);
+                request.put("coordenandaX", coordenadaX);
+            }
+            request.put("direccion", direccionAccidente);
+            request.put("id", id);
+            request.put("informeAccidenteTransito", informe);
+            request.put("localidadComuna", LocalidadComunaAccidente);
+
+            this.registrar("El Lugar",request,activity,true);
+
+            //Caracteristicas via
+            request = new JSONObject();
+            request.put("calzada", calzada);
+            request.put("caracGeometricaVia1", carac1);
+            request.put("caracGeometricaVia2", carac2);
+            request.put("caracGeometricaVia3", carac3);
+            request.put("carril", carril);
+            request.put("id", id);
+            request.put("informeAccidenteTransito", informe);
+            if (condicion != null) {
+                request.put("condicion", condicion);
+            }
+            request.put("controlDemarcacion", demarcacion);
+            request.put("controlSemaforo", semaforo);
+            request.put("controlSenales", senial);
+            request.put("disminucionVisual", disminucion);
+            request.put("estado", estado);
+            request.put("iluminacion", ilumunacion);
+            request.put("material", material);
+            request.put("utilizacion", utilizacion);
+
+            this.registrar("Las CaracteristicasVia",request,activity,true);
 
             Intent intent = new Intent(this.activity, RegistroVehiculoAccidente.class);
 

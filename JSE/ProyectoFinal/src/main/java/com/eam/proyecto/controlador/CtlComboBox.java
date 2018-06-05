@@ -106,7 +106,7 @@ public class CtlComboBox extends ControladorAbstracto {
         return model;
     }
 
-    public void modeloListaFiltrado(JList<String> lst,String texto) {
+    public void modeloListaFiltrado(JList<String> lst, String texto) {
         DefaultListModel<String> model = new DefaultListModel<>();
         ArrayList<String> lista = new ArrayList<>();
         for (int i = 0; i < lst.getModel().getSize(); i++) {

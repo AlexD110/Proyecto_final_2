@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InformeAccidente" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ed702b51-9a46-4313-890c-15077bd97e55">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Oracle Admin - Proyecto"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#E6E8EB">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#B0D9FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="DatosInforme" uuid="73aa8a62-de9a-42a2-96cb-f13a7d5b74ce">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Oracle Admin - Proyecto"/>
+		<parameter name="nip" class="java.lang.String"/>
+		<parameter name="fecha1" class="java.lang.String"/>
+		<parameter name="fecha2" class="java.lang.String"/>
+		<parameter name="municipio" class="java.lang.String"/>
+		<parameter name="clase" class="java.lang.String"/>
+		<parameter name="gravedad" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT 
+    IA.Fecha_Hora,
+    IA.Tipo_Gravedad,
+    IA.Clase_Accidente,
+    IA.Numero_Heridos,
+    IA.Numero_Muertos,
+    P.Nombre_Completo
+FROM 
+    Informe_Accidente_Transito IA
+JOIN 
+    Persona P
+ON(P.Nip=IA.Agente)
+JOIN
+	Municipio M
+ON(M.Id=P.Municipio_Id)
+WHERE
+	P.Nip=$P{nip}
+OR
+	UPPER(M.Nombre)=UPPER($P{municipio})
+OR
+	(IA.Fecha_Hora 
+BETWEEN 
+	$P{fecha1} 
+AND 
+	$P{fecha2})
+OR
+	IA.Clase_Accidente = $P{clase}
+OR
+	IA.Tipo_Gravedad = $P{gravedad}]]>
+		</queryString>
+		<field name="FECHA_HORA" class="java.sql.Timestamp">
+			<property name="com.jaspersoft.studio.field.label" value="FECHA_HORA"/>
+		</field>
+		<field name="TIPO_GRAVEDAD" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="TIPO_GRAVEDAD"/>
+		</field>
+		<field name="CLASE_ACCIDENTE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="CLASE_ACCIDENTE"/>
+		</field>
+		<field name="NUMERO_HERIDOS" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="NUMERO_HERIDOS"/>
+		</field>
+		<field name="NUMERO_MUERTOS" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="NUMERO_MUERTOS"/>
+		</field>
+		<field name="NOMBRE_COMPLETO" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="NOMBRE_COMPLETO"/>
+		</field>
+	</subDataset>
+	<parameter name="nipAgente" class="java.lang.String"/>
+	<parameter name="fechaInicio" class="java.lang.String"/>
+	<parameter name="fechaFin" class="java.lang.String"/>
+	<parameter name="municipioAccidente" class="java.lang.String"/>
+	<parameter name="claseAccidente" class="java.lang.String"/>
+	<parameter name="gravedadAccidente" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+    IA.Fecha_Hora,
+    IA.Tipo_Gravedad,
+    IA.Clase_Accidente,
+    IA.Numero_Heridos,
+    IA.Numero_Muertos,
+    P.Nip,
+    P.Nombre_Completo
+FROM 
+    Informe_Accidente_Transito IA
+JOIN 
+    Persona P
+ON(P.Nip=IA.Agente)]]>
+	</queryString>
+	<field name="FECHA_HORA" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="FECHA_HORA"/>
+	</field>
+	<field name="TIPO_GRAVEDAD" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TIPO_GRAVEDAD"/>
+	</field>
+	<field name="CLASE_ACCIDENTE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CLASE_ACCIDENTE"/>
+	</field>
+	<field name="NUMERO_HERIDOS" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="NUMERO_HERIDOS"/>
+	</field>
+	<field name="NUMERO_MUERTOS" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="NUMERO_MUERTOS"/>
+	</field>
+	<field name="NIP" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NIP"/>
+	</field>
+	<field name="NOMBRE_COMPLETO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NOMBRE_COMPLETO"/>
+	</field>
+	<variable name="FECHA_HORA1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{FECHA_HORA}]]></variableExpression>
+	</variable>
+	<variable name="CLASE_ACCIDENTE1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{CLASE_ACCIDENTE}]]></variableExpression>
+	</variable>
+	<variable name="TIPO_GRAVEDAD1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{TIPO_GRAVEDAD}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="120">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="140" backcolor="#006699" uuid="a725e64a-0aff-4aa7-8b5a-de5ec683a89d"/>
+				<staticText>
+					<reportElement x="20" y="20" width="555" height="100" forecolor="#FFFFFF" uuid="4266dcc0-925e-4d46-b63a-380b352e44be"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[INFORMES DE ACCIDENTES DE TRANSITO]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="127">
+			<line>
+				<reportElement x="-20" y="0" width="595" height="1" forecolor="#666666" uuid="22c63baa-37d7-40a8-bdc0-d980ae0179cc"/>
+			</line>
+			<componentElement>
+				<reportElement x="30" y="34" width="480" height="59" uuid="1fbe96a4-c91b-4d72-ae34-c7944e385019">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="Blank">
+					<datasetRun subDataset="DatosInforme" uuid="55411533-a25c-4ebb-89ef-a22a900f2b79">
+						<datasetParameter name="nip">
+							<datasetParameterExpression><![CDATA[$P{nipAgente}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="fecha1">
+							<datasetParameterExpression><![CDATA[$P{fechaInicio}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="fecha2">
+							<datasetParameterExpression><![CDATA[$P{fechaFin}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="clase">
+							<datasetParameterExpression><![CDATA[$P{claseAccidente}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="gravedad">
+							<datasetParameterExpression><![CDATA[$P{gravedadAccidente}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="municipio">
+							<datasetParameterExpression><![CDATA[$P{municipioAccidente}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION} ]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="60" uuid="830359d7-f2e5-4f6d-bf87-6ef3bcbe8e70">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="60" height="30" uuid="26b7e1f0-2197-41b5-b6a7-cdda93440c9b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Serif" size="9"/>
+								</textElement>
+								<text><![CDATA[Fecha y hora]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="60" height="30" uuid="fd6d6b54-60f0-4e50-9662-aa5beaab6fbd"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Serif" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{FECHA_HORA}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="976dcea0-98df-41c5-8c95-b08d31f136c5">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="80" height="30" uuid="062c5cbb-42fb-4d51-8085-e5a6740f7fe8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Serif" size="10"/>
+								</textElement>
+								<text><![CDATA[Gravedad de accidente]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="80" height="30" uuid="d698af44-55b4-4927-8e93-0503233ef9c6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Serif" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{TIPO_GRAVEDAD}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="76a4216b-744c-4689-9e0d-020ebde74afd">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="80" height="30" uuid="ca1dd96b-246e-4e2a-8ca3-8f6f1d227f83"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Serif"/>
+								</textElement>
+								<text><![CDATA[Clase de accidente]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="80" height="30" uuid="bbbf95c0-59fb-4068-bf1a-136493fddc05"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Serif" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{CLASE_ACCIDENTE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="4dbbfc2d-986a-4851-9abb-d9598bab5360">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="80" height="30" uuid="114c785f-f34f-44e3-9f59-2feaaa01788b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Serif"/>
+								</textElement>
+								<text><![CDATA[Numero de heridos]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="80" height="30" uuid="3d58ec96-0d77-4dd8-b973-b4ba84e90336"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Serif" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{NUMERO_HERIDOS}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="ab5807cf-b490-40ae-a04c-1a8427ed1048">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="60" height="30" uuid="9ddc814c-6c66-41a5-8cfb-f8868478ee2a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Serif"/>
+								</textElement>
+								<text><![CDATA[Numero de muertos]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="60" height="30" uuid="72bf45e2-820d-4aa5-bc0f-fe7b5cc294c3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Serif" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{NUMERO_MUERTOS}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="120" uuid="f8ec1204-0bab-4f90-b533-d76229984e5a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="120" height="30" uuid="a991f45f-7944-43d4-b7fe-e7432fb515a8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Serif"/>
+								</textElement>
+								<text><![CDATA[Nombre del agente]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="120" height="30" uuid="24919298-550a-4f03-bcaa-b772702dc8f3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Serif" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{NOMBRE_COMPLETO}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="63cd7846-a712-4818-8b07-1ce9c7222ef8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="24e1bf2a-231e-4ac1-b549-0c85fd2d4d9b"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="95452683-87c8-4cf7-8621-59ac24dc41b2"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

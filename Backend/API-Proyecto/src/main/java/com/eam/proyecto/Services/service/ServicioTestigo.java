@@ -5,8 +5,10 @@
  */
 package com.eam.proyecto.Services.service;
 
+import com.eam.proyecto.DTO.InformeAccidenteTransito;
 import com.eam.proyecto.Negocio.EstructuraRestFulNegocio;
 import com.eam.proyecto.DTO.Testigos;
+import com.eam.proyecto.Negocio.InformeAccidenteNegocio;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -24,8 +26,10 @@ import javax.ws.rs.core.Response;
  *
  * @author Daryl Ospina
  */
-@Path("Tetigo")
+@Path("Testigo")
 public class ServicioTestigo extends EstructuraRestFulNegocio<Testigos> {
+    
+    private final InformeAccidenteNegocio nego = new InformeAccidenteNegocio(InformeAccidenteTransito.class);
     
     public ServicioTestigo() {
         super(Testigos.class);
@@ -59,6 +63,22 @@ public class ServicioTestigo extends EstructuraRestFulNegocio<Testigos> {
     @Produces({MediaType.APPLICATION_JSON})
     public Testigos find(@PathParam("id") BigDecimal id) {
         return super.buscar(id);
+    }
+    
+    @GET
+    @Path("Informe/{idInforme}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Testigos> traerPerjudicados(@PathParam("idInforme") BigDecimal idInforme){
+        return nego.consultarTestigos(""
+                + "SELECT "
+                + "     T.* "
+                + "FROM "
+                + "     Testigos T "
+                + "JOIN "
+                + "     Informe_Accidente_Transito IA "
+                + "ON(IA.ID=T.Informe_Accidente_Transito_Id) "
+                + "WHERE "
+                + "     IA.ID="+idInforme);
     }
 
     @GET

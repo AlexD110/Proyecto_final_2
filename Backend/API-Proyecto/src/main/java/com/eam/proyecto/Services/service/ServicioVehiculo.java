@@ -7,6 +7,9 @@ package com.eam.proyecto.Services.service;
 
 import com.eam.proyecto.Negocio.EstructuraRestFulNegocio;
 import com.eam.proyecto.DTO.Vehiculo;
+import com.eam.proyecto.Negocio.VehiculoNegocio;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -25,6 +28,8 @@ import javax.ws.rs.core.Response;
  */
 @Path("Vehiculo")
 public class ServicioVehiculo extends EstructuraRestFulNegocio<Vehiculo> {
+    
+    private final VehiculoNegocio vehiculoNego = new VehiculoNegocio(Vehiculo.class);
     
     public ServicioVehiculo() {
         super(Vehiculo.class);
@@ -64,6 +69,19 @@ public class ServicioVehiculo extends EstructuraRestFulNegocio<Vehiculo> {
     @Override
     @Produces({MediaType.APPLICATION_JSON})
     public List<Vehiculo> listar() {
+        return super.listar();
+    }
+    
+    @GET
+    @Path("TraerVehiculos/{consulta}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Vehiculo> listarConConsulta(@PathParam("consulta") String consulta) {
+        try {
+            String consultaDecodificada = URLDecoder.decode(consulta, "UTF-8");
+            return this.vehiculoNego.cargarConConsulta(consultaDecodificada);
+        } catch (UnsupportedEncodingException ex) {
+            System.out.println("[Error] : fallo al decodificar consulta:"+consulta+" Excepcion:"+ex);
+        }
         return super.listar();
     }
 

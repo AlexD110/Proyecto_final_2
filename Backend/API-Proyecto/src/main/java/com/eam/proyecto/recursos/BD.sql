@@ -446,6 +446,7 @@ CREATE TABLE vehiculos_afectados (
 );
 
 ALTER TABLE vehiculos_afectados ADD CONSTRAINT vehiculos_afectados_pk PRIMARY KEY ( id );
+ALTER TABLE vehiculos_afectados ADD CONSTRAINT vehiculo_accidente__un UNIQUE( vehiculo_placa,informe_accidente_transito_id );
 
 
 ALTER TABLE comparendo

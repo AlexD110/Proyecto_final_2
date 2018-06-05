@@ -197,6 +197,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         btnRegistrarse.setText("REGISTRARSE");
         btnRegistrarse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -384,7 +389,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
             try {
                 if ((boolean) respuesta.get("Acceso")) {
-                    this.controladorUsuario.iniciarVentana(this, respuesta.get("Rol").toString());
+                    this.controladorUsuario.iniciarVentana(this, respuesta);
                 } else {
                     JOptionPane.showMessageDialog(this, "La contraseña y el "
                             + "nombre de usuario no coinciden con ningun usuario registrado");
@@ -396,6 +401,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
+    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
+        FrmRegistroCiudadano ventanaRegistroCiudadano = new FrmRegistroCiudadano(this, true);
+        ventanaRegistroCiudadano.setLocationRelativeTo(null);
+        ventanaRegistroCiudadano.setVisible(true);
+    }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;

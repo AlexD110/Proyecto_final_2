@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -55,70 +56,70 @@ public class CaracteristicaVia implements Serializable {
     private BigDecimal id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 50)
     @Column(name = "CARAC_GEOMETRICA_VIA_1")
     private String caracGeometricaVia1;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 50)
     @Column(name = "CARAC_GEOMETRICA_VIA_2")
     private String caracGeometricaVia2;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 50)
     @Column(name = "CARAC_GEOMETRICA_VIA_3")
     private String caracGeometricaVia3;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "UTILIZACION")
     private String utilizacion;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "CALZADA")
     private String calzada;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "CARRIL")
     private String carril;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "MATERIAL")
     private String material;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "ESTADO")
     private String estado;
-    @Size(max = 20)
+    @Size(max = 50)
     @Column(name = "CONDICION")
     private String condicion;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "ILUMINACION")
     private String iluminacion;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "DISMINUCION_VISUAL")
     private String disminucionVisual;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "CONTROL_SEMAFORO")
     private String controlSemaforo;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 5)
+    @Size(min = 1, max = 50)
     @Column(name = "CONTROL_SENALES")
     private String controlSenales;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "CONTROL_DEMARCACION")
     private String controlDemarcacion;
     @JoinColumn(name = "ID", referencedColumnName = "ID", insertable = false, updatable = false)
@@ -269,6 +270,7 @@ public class CaracteristicaVia implements Serializable {
         this.controlDemarcacion = controlDemarcacion;
     }
 
+    @XmlTransient
     public InformeAccidenteTransito getInformeAccidenteTransito() {
         return informeAccidenteTransito;
     }

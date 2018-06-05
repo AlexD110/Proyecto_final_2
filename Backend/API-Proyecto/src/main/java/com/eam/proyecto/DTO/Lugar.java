@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -43,10 +44,10 @@ public class Lugar implements Serializable {
     @NotNull
     @Column(name = "ID")
     private BigDecimal id;
-    @Size(max = 5)
+    @Size(max = 20)
     @Column(name = "COORDENANDA_X")
     private String coordenandaX;
-    @Size(max = 5)
+    @Size(max = 20)
     @Column(name = "COORDENADA_Y")
     private String coordenadaY;
     @Basic(optional = false)
@@ -116,6 +117,7 @@ public class Lugar implements Serializable {
         this.localidadComuna = localidadComuna;
     }
 
+    @XmlTransient
     public InformeAccidenteTransito getInformeAccidenteTransito() {
         return informeAccidenteTransito;
     }

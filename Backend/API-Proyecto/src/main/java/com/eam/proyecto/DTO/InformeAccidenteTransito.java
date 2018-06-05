@@ -110,6 +110,7 @@ public class InformeAccidenteTransito implements Serializable {
     }
 
     public InformeAccidenteTransito(BigDecimal id) {
+        
         this.id = id;
     }
 
@@ -212,7 +213,7 @@ public class InformeAccidenteTransito implements Serializable {
     public void setAgente(Persona agente) {
         this.agente = agente;
     }
-
+    
     public Lugar getLugar() {
         return lugar;
     }
@@ -221,7 +222,6 @@ public class InformeAccidenteTransito implements Serializable {
         this.lugar = lugar;
     }
 
-    @XmlTransient
     public CaracteristicaLugar getCaracteristicaLugar() {
         return caracteristicaLugar;
     }

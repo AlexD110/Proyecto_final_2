@@ -29,7 +29,7 @@ import javax.ws.rs.core.Response;
 @Path("Perjudicados")
 public class ServicioPerjudicados extends EstructuraRestFulNegocio<Perjudicados> {
     
-    private InformeAccidenteNegocio nego = new InformeAccidenteNegocio(InformeAccidenteTransito.class);
+    private final InformeAccidenteNegocio nego = new InformeAccidenteNegocio(InformeAccidenteTransito.class);
 
     public ServicioPerjudicados() {
         super(Perjudicados.class);

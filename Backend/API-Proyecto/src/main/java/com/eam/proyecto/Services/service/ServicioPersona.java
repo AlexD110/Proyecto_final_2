@@ -9,7 +9,10 @@ import com.eam.proyecto.DTO.Comparendo;
 import com.eam.proyecto.Negocio.EstructuraRestFulNegocio;
 import com.eam.proyecto.DTO.Persona;
 import com.eam.proyecto.Negocio.ComparendoNegocio;
+import com.eam.proyecto.Negocio.PersonaNegocio;
 import com.eam.proyecto.util.Herramientas;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -30,6 +33,7 @@ import javax.ws.rs.core.Response;
 public class ServicioPersona extends EstructuraRestFulNegocio<Persona> {
     
     private final ComparendoNegocio comparendoNego = new ComparendoNegocio(Comparendo.class);
+    private final PersonaNegocio personaNego = new PersonaNegocio(Persona.class);
     
     public ServicioPersona() {
         super(Persona.class);
@@ -85,6 +89,19 @@ public class ServicioPersona extends EstructuraRestFulNegocio<Persona> {
     }
     
     @GET
+    @Path("/Agentes")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Persona> traerAgentes() {
+        return this.personaNego.cargarConConsulta(""
+                + "SELECT "
+                + "     P.* "
+                + "FROM "
+                + "     Persona P "
+                + "WHERE "
+                + "     P.Placa_Agente IS NOT NULL");
+    }
+    
+    @GET
     @Path("{id}/TraerComparendos/Precios")
     @Produces({MediaType.APPLICATION_JSON})
     public Response traerComparendosConPrecio(@PathParam("id") String id) {
@@ -97,6 +114,19 @@ public class ServicioPersona extends EstructuraRestFulNegocio<Persona> {
                                 + "    Comparendo C "
                                 + "WHERE "
                                 + "    C.Infractor="+id)));
+    }
+    
+    @GET
+    @Path("TraerPersonas/{consulta}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Persona> listarConConsulta(@PathParam("consulta") String consulta) {
+        try {
+            String consultaDecodificada = URLDecoder.decode(consulta, "UTF-8");
+            return this.personaNego.cargarConConsulta(consultaDecodificada);
+        } catch (UnsupportedEncodingException ex) {
+            System.out.println("[Error] : fallo al decodificar consulta:"+consulta+" Excepcion:"+ex);
+        }
+        return super.listar();
     }
     
     @GET

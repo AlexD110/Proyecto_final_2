@@ -37,146 +37,402 @@
                 android:orientation="horizontal">
 
                 <Space
-                    android:layout_width="wrap_content"
+                    android:layout_width="82dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 
-                <LinearLayout
-                    android:layout_width="314dp"
+                <ScrollView
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_weight="1">
 
-                    <EditText
-                        android:id="@+id/txtfechaAccidete"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:fontFamily="sans-serif"
-                        android:hint="Fecha del Accidente (año-mes-dia)"
-                        android:inputType="date" />
+                        android:orientation="vertical" >
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="14dp" />
+                        <EditText
+                            android:id="@+id/txtfechaAccidete"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:fontFamily="sans-serif"
+                            android:hint="Fecha del Accidente (año-mes-dia)"
+                            android:inputType="date" />
 
-                    <Spinner
-                        android:id="@+id/cbTipoGravedadAccidente"
-                        android:layout_width="match_parent"
-                        android:layout_height="42dp" />
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp" />
+                        <Spinner
+                            android:id="@+id/cbTipoGravedadAccidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_weight="1" />
 
-                    <Spinner
-                        android:id="@+id/cbClaseAccidente"
-                        android:layout_width="match_parent"
-                        android:layout_height="42dp" />
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="14dp" />
+                        <Spinner
+                            android:id="@+id/cbClaseAccidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_weight="1" />
 
-                    <Spinner
-                        android:id="@+id/cbChoqueCon"
-                        android:layout_width="match_parent"
-                        android:layout_height="42dp" />
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="11dp" />
+                        <Spinner
+                            android:id="@+id/cbChoqueCon"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_weight="1" />
 
-                    <Spinner
-                        android:id="@+id/cbObjetoFijo"
-                        android:layout_width="match_parent"
-                        android:layout_height="42dp" />
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <Spinner
+                            android:id="@+id/cbObjetoFijo"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_weight="1" />
 
-                    <EditText
-                        android:id="@+id/txtNumeroMuertos"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:fontFamily="sans-serif"
-                        android:hint="Numero de muertos"
-                        android:inputType="number" />
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
 
-                    <Space
-                        android:id="@+id/space40"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <EditText
+                            android:id="@+id/txtNumeroMuertos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:fontFamily="sans-serif"
+                            android:hint="Numero de muertos"
+                            android:inputType="number" />
 
-                    <EditText
-                        android:id="@+id/txtNumeroHeridos"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:fontFamily="sans-serif"
-                        android:hint="Numero de heridos"
-                        android:inputType="number" />
+                        <Space
+                            android:id="@+id/space40"
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
 
-                    <Space
-                        android:id="@+id/space333"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <EditText
+                            android:id="@+id/txtNumeroHeridos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:fontFamily="sans-serif"
+                            android:hint="Numero de heridos"
+                            android:inputType="number" />
 
-                    <Spinner
-                        android:id="@+id/cbAreaAccidente"
-                        android:layout_width="match_parent"
-                        android:layout_height="42dp" />
+                        <Space
+                            android:id="@+id/space333"
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
 
-                    <Space
-                        android:id="@+id/space23"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <Spinner
+                            android:id="@+id/cbAreaAccidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_weight="1" />
 
-                    <Spinner
-                        android:id="@+id/cbSectorAccidente"
-                        android:layout_width="match_parent"
-                        android:layout_height="42dp" />
+                        <Space
+                            android:id="@+id/space23"
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
 
-                    <Space
-                        android:id="@+id/space3333"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <Spinner
+                            android:id="@+id/cbSectorAccidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_weight="1" />
 
-                    <Spinner
-                        android:id="@+id/cbZonaAccidente"
-                        android:layout_width="match_parent"
-                        android:layout_height="42dp" />
+                        <Space
+                            android:id="@+id/space3333"
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
 
-                    <Space
-                        android:id="@+id/e"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <Spinner
+                            android:id="@+id/cbZonaAccidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_weight="1" />
 
-                    <Spinner
-                        android:id="@+id/cbDisenioAccidente"
-                        android:layout_width="match_parent"
-                        android:layout_height="42dp" />
+                        <Space
+                            android:id="@+id/e"
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
 
-                    <Space
-                        android:id="@+id/space33333"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <Spinner
+                            android:id="@+id/cbDisenioAccidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_weight="1" />
 
-                    <Spinner
-                        android:id="@+id/cbTiempo"
-                        android:layout_width="match_parent"
-                        android:layout_height="42dp" />
+                        <Space
+                            android:id="@+id/space33333"
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
 
-                    <Space
-                        android:id="@+id/space33"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <Spinner
+                            android:id="@+id/cbTiempo"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_weight="1" />
 
-                </LinearLayout>
+                        <Space
+                            android:id="@+id/space33"
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <EditText
+                            android:id="@+id/txtCoordenadaX_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Coordenada X"
+                            android:inputType="textPersonName" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <EditText
+                            android:id="@+id/txtCoordenadaY_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Coordenada Y"
+                            android:inputType="textPersonName" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <EditText
+                            android:id="@+id/txtDireccion_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Direccion del lugar"
+                            android:inputType="textPersonName" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <EditText
+                            android:id="@+id/txtLocalidaComuna_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Localidad o comuna del accidente"
+                            android:inputType="textPersonName" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/lblVia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Caracteristicas de la via"
+                            android:textAlignment="center" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="14dp"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/cbCarac1_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/cbCarac2_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/cbCarac3_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/cbUtilizacion_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/cbCalzada_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/cbCarril_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/cbMaterial_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/cbEstado_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/cbCondicion_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/cbIluminacion_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/cbDisminucion_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/cbSemaforo_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <EditText
+                            android:id="@+id/txtSenial_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Señales de transito"
+                            android:inputType="textPersonName" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/cbDemarcacion_accidente"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="13dp"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+                </ScrollView>
 
                 <Space
-                    android:layout_width="wrap_content"
+                    android:layout_width="84dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 

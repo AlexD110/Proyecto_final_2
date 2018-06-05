@@ -26,7 +26,7 @@ import java.net.URL;
 
 public abstract class Cliente {
 
-    protected String urlPeticion = "http://192.168.137.226:8080/API-Proyecto/Recursos/";
+    protected String urlPeticion = "http://192.168.1.7:8080/API-Proyecto/Recursos/";
 
     protected JSONObject traerBD(String entidad, Object dato) {
 

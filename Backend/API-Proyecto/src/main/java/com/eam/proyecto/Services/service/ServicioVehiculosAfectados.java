@@ -5,8 +5,10 @@
  */
 package com.eam.proyecto.Services.service;
 
+import com.eam.proyecto.DTO.InformeAccidenteTransito;
 import com.eam.proyecto.Negocio.EstructuraRestFulNegocio;
 import com.eam.proyecto.DTO.VehiculosAfectados;
+import com.eam.proyecto.Negocio.InformeAccidenteNegocio;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -26,6 +28,8 @@ import javax.ws.rs.core.Response;
  */
 @Path("VehiculosAfectados")
 public class ServicioVehiculosAfectados extends EstructuraRestFulNegocio<VehiculosAfectados> {
+    
+    private final InformeAccidenteNegocio nego = new InformeAccidenteNegocio(InformeAccidenteTransito.class);
     
     public ServicioVehiculosAfectados() {
         super(VehiculosAfectados.class);
@@ -66,6 +70,22 @@ public class ServicioVehiculosAfectados extends EstructuraRestFulNegocio<Vehicul
     @Produces({MediaType.APPLICATION_JSON})
     public List<VehiculosAfectados> listar() {
         return super.listar();
+    }
+    
+    @GET
+    @Path("Informe/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<VehiculosAfectados> listar(@PathParam("id") BigDecimal id) {
+        return this.nego.consultarVehiculosAfectados(""
+                + "SELECT "
+                + "     VF.* "
+                + "FROM "
+                + "     Vehiculos_Afectados VF "
+                + "JOIN "
+                + "     Informe_Accidente_Transito IA "
+                + "ON(IA.ID=VF.Informe_Accidente_Transito_Id) "
+                + "WHERE "
+                + "     IA.ID="+id.intValue());
     }
 
     @GET

@@ -5,6 +5,7 @@
  */
 package com.eam.proyecto.vista;
 
+import com.eam.proyecto.vista.paneles.InformeAccidente.pnlAccidente;
 import com.eam.proyecto.vista.paneles.PnlCrudUsuPerson;
 import com.eam.proyecto.vista.paneles.PnlVehiculos;
 import java.awt.BorderLayout;
@@ -15,18 +16,21 @@ import java.awt.BorderLayout;
  */
 public class FrmAdministrador extends javax.swing.JFrame {
 
-    
     public FrmAdministrador() {
         initComponents();
         PnlCrudUsuPerson panelUsuPerson = new PnlCrudUsuPerson();
         pnlPerUsu.setLayout(new BorderLayout(5, 5));
         pnlPerUsu.add(panelUsuPerson, BorderLayout.CENTER);
         pnlPerUsu.updateUI();
-        
+
         PnlVehiculos pnlVehiculosO = new PnlVehiculos();
-        pnlVehiculos.setLayout(new BorderLayout(5,5));
-        pnlVehiculos.add(pnlVehiculosO,BorderLayout.CENTER);
+        pnlVehiculos.setLayout(new BorderLayout(5, 5));
+        pnlVehiculos.add(pnlVehiculosO, BorderLayout.CENTER);
         pnlVehiculos.updateUI();
+
+        pnlAccidente pnlInforme = new pnlAccidente(this,null);
+        pnlInformeAccidente.setViewportView(pnlInforme);
+        pnlInformeAccidente.getViewport().setView(pnlInforme);
     }
 
     /**
@@ -38,15 +42,19 @@ public class FrmAdministrador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         pnlPerUsu = new javax.swing.JPanel();
         pnlVehiculos = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        pnlInformeAccidente = new javax.swing.JScrollPane();
         btnCerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(1, 20, 30));
 
@@ -71,11 +79,15 @@ public class FrmAdministrador extends javax.swing.JFrame {
         pnlPerUsu.setLayout(pnlPerUsuLayout);
         pnlPerUsuLayout.setHorizontalGroup(
             pnlPerUsuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addGap(0, 908, Short.MAX_VALUE)
+=======
+            .addGap(0, 604, Short.MAX_VALUE)
+>>>>>>> 1198f3bc53e1782da37626f21ff62027b8de87bc
         );
         pnlPerUsuLayout.setVerticalGroup(
             pnlPerUsuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 628, Short.MAX_VALUE)
+            .addGap(0, 689, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Personas y Usuarios", pnlPerUsu);
@@ -84,14 +96,31 @@ public class FrmAdministrador extends javax.swing.JFrame {
         pnlVehiculos.setLayout(pnlVehiculosLayout);
         pnlVehiculosLayout.setHorizontalGroup(
             pnlVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addGap(0, 908, Short.MAX_VALUE)
+=======
+            .addGap(0, 604, Short.MAX_VALUE)
+>>>>>>> 1198f3bc53e1782da37626f21ff62027b8de87bc
         );
         pnlVehiculosLayout.setVerticalGroup(
             pnlVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 628, Short.MAX_VALUE)
+            .addGap(0, 689, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Vehiculo", pnlVehiculos);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlInformeAccidente, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlInformeAccidente, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("InformeAccidente", jPanel4);
 
         btnCerrarSesion.setText("Cerrar Sesión");
         btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -104,10 +133,19 @@ public class FrmAdministrador extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesion)
+=======
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCerrarSesion))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE))
+>>>>>>> 1198f3bc53e1782da37626f21ff62027b8de87bc
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -126,7 +164,8 @@ public class FrmAdministrador extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,15 +173,17 @@ public class FrmAdministrador extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jScrollPane1.setViewportView(jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
         );
 
         pack();
@@ -160,9 +201,12 @@ public class FrmAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane pnlInformeAccidente;
     private javax.swing.JPanel pnlPerUsu;
     private javax.swing.JPanel pnlVehiculos;
     // End of variables declaration//GEN-END:variables
- 
+
 }
