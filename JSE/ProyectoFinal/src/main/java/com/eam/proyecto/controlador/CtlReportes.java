@@ -27,6 +27,8 @@ public class CtlReportes {
             jv.setVisible(true);
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println("[Error] : Generando reporte Excepcion: " + ex);
+        } catch (JRException ex) {
+            System.out.println("[Error] : Generando reporte Excepcion: " + ex);
         }
     }
 }

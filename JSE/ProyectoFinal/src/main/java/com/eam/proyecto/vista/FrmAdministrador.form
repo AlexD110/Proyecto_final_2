@@ -24,7 +24,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane1" alignment="0" pref="683" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" alignment="0" pref="814" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -48,37 +48,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
-                  <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-        </Container>
-        <Container class="javax.swing.JPanel" name="jPanel3">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="9a" green="75" red="5" type="rgb"/>
-            </Property>
-          </Properties>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTabbedPane1" alignment="0" pref="913" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnCerrarSesion" min="-2" max="-2" attributes="0"/>
-=======
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel3" max="32767" attributes="0"/>
->>>>>>> 1198f3bc53e1782da37626f21ff62027b8de87bc
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -118,12 +91,6 @@
                 </Property>
               </Properties>
 
-<<<<<<< HEAD
-                  <Layout>
-                    <DimensionLayout dim="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="908" max="32767" attributes="0"/>
-=======
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -133,10 +100,9 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="btnCerrarSesion" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jTabbedPane1" alignment="0" pref="609" max="32767" attributes="0"/>
+                              <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
->>>>>>> 1198f3bc53e1782da37626f21ff62027b8de87bc
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -154,20 +120,6 @@
               <SubComponents>
                 <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
 
-<<<<<<< HEAD
-                  <Layout>
-                    <DimensionLayout dim="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="908" max="32767" attributes="0"/>
-                      </Group>
-                    </DimensionLayout>
-                    <DimensionLayout dim="1">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="628" max="32767" attributes="0"/>
-                      </Group>
-                    </DimensionLayout>
-                  </Layout>
-=======
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                   <SubComponents>
                     <Container class="javax.swing.JPanel" name="pnlPerUsu">
@@ -187,7 +139,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="604" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="735" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -209,7 +161,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="604" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="735" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -231,7 +183,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="pnlInformeAccidente" alignment="0" pref="604" max="32767" attributes="0"/>
+                              <Component id="pnlInformeAccidente" alignment="0" pref="735" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -248,7 +200,6 @@
                       </SubComponents>
                     </Container>
                   </SubComponents>
->>>>>>> 1198f3bc53e1782da37626f21ff62027b8de87bc
                 </Container>
                 <Component class="javax.swing.JButton" name="btnCerrarSesion">
                   <Properties>
