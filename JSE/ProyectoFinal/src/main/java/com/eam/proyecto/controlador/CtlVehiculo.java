@@ -17,8 +17,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-
-
 public class CtlVehiculo extends ControladorAbstracto {
 
     public DefaultTableModel listarFiltrado(Map<String, String> campos) {
@@ -94,6 +92,32 @@ public class CtlVehiculo extends ControladorAbstracto {
         }
         return modelo;
     }
+    
+        public DefaultTableModel listarAvanced(String entidad) {
+        String[] lista = {"Placa", "Numero motor", "Cilindraje", "Numero de chasis", "Tipo de gasolina", "Numero de serie","Numero de vin"};
+        DefaultTableModel modelo = new DefaultTableModel(new Object[][]{}, lista);
+        try {
+            String response = this.traerlistar(entidad + "/");
+            JSONArray vehiculos = ((JSONArray) (new JSONParser().parse(response)));
+            for (int i = 0; i < vehiculos.size(); i++) {
+                JSONObject vehisulo2 = (JSONObject) vehiculos.get(i);
+                modelo.addRow(new Object[]{
+                   
+                    vehisulo2.get("placa").toString(),
+                    vehisulo2.get("noMotor").toString(),
+                    vehisulo2.get("clindrada").toString(),
+                    vehisulo2.get("noChasis").toString(),
+                    vehisulo2.get("combustible").toString(),
+                    vehisulo2.get("noSerie").toString(),
+                    vehisulo2.get("noVin").toString()
+
+                });
+            }
+        } catch (ParseException ex) {
+            System.out.println("[Error] : " + ex);
+        }
+        return modelo;
+    }
 
     public Integer numeroRegistros() {
         try {
@@ -116,6 +140,19 @@ public class CtlVehiculo extends ControladorAbstracto {
                     this.crearJson(placa, modelo, linea, marca, licencia_transito, clase_vehiculo,
                             tipo_vehiculo, lugar_matricula, nacionalidad, color,
                             empresa_nit, capacidad_carga, numero_pasajeros, no_targeta_operacion), "Vehiculo").readEntity(String.class)))).get("Resultado");
+
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    public boolean guardarAvanzado(String motor, String cilindrada, String chasis, String serie, String vin,
+            String gasolina, String placa) {
+
+        try {
+
+            return (boolean) ((JSONObject) (new JSONParser().parse(this.registrar(
+                    this.crearJsonAvanzado(motor, cilindrada, chasis, serie, vin, gasolina, placa), "VehiculoTramite").readEntity(String.class)))).get("Resultado");
 
         } catch (ParseException e) {
             return false;
@@ -167,6 +204,29 @@ public class CtlVehiculo extends ControladorAbstracto {
 
         }
         return id;
+    }
+
+    private String crearJsonAvanzado(String motor, String cilindrada, String chasis, String serie, String vin,
+            String gasolina, String placa) {
+        try {
+            JSONObject request = new JSONObject(), vehiculo;
+            request.put("noMotor", motor);
+            request.put("clindrada", cilindrada);
+            request.put("noChasis", chasis);
+            request.put("noSerie", serie);
+            request.put("noVin", vin);
+            request.put("combustible", gasolina);
+            request.put("placa", placa);
+
+            vehiculo = ((JSONObject) (new JSONParser().parse(traerlistar("Vehiculo/" + placa))));
+            request.put("vehiculo", vehiculo);
+
+            return request.toString();
+        } catch (ParseException ex) {
+            return null;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     private String crearJson(String placa, String modelo,

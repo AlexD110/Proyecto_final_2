@@ -7,6 +7,7 @@ package com.eam.proyecto.Services.service;
 
 import com.eam.proyecto.DTO.HistorialDueno;
 import com.eam.proyecto.Negocio.EstructuraRestFulNegocio;
+import com.eam.proyecto.Negocio.Negocio;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.ws.rs.Consumes;

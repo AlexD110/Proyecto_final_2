@@ -39,6 +39,10 @@ public class CtlComboBox extends ControladorAbstracto {
         this.cargarCb(cbValidacion, "Seleccione una pregunta de seguridad", "Validacion/", "descripcion");
     }
 
+    public void cargarTipoTramite(JComboBox cbTramite) {
+        this.cargarCb(cbTramite, "Seleccione un tipo tramite", "TipoTramite/", "descripcion");
+    }
+
     public void cargarEps(JComboBox cbEps) {
         cbEps.removeAllItems();
         cbEps.addItem("Seleccione una EPS");
