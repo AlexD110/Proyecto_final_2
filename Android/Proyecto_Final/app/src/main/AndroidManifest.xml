@@ -3,11 +3,7 @@
     package="proyectofinal.proyecto_final">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<<<<<<< HEAD
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-=======
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
->>>>>>> 1198f3bc53e1782da37626f21ff62027b8de87bc
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -50,7 +46,7 @@
 
         <activity
             android:name=".Activities.Accidente.MapaAccidente"
-            android:label="@string/title_activity_mapa_accidente"></activity>
+            android:label="@string/title_activity_mapa_accidente" />
     </application>
 
 </manifest>
