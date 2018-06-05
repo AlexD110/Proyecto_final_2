@@ -883,6 +883,12 @@ public class PnlCrudUsuPerson extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Por favor llene los campos requeridos");
         } else {
             try {
+
+                if (txtNombreUsuario.getText().trim().equals("admin")) {
+                    JOptionPane.showMessageDialog(this, "No se pudo registrar el usuario");
+                    return;
+                }
+                
                 String nombreUsuario, contrasena, email = null, respuestaS, nipPersona, tipoUsuario;
                 int preguntaS;
 
@@ -893,6 +899,7 @@ public class PnlCrudUsuPerson extends javax.swing.JPanel {
                         email = txtEmail.getText().trim();
                     } else {
                         JOptionPane.showMessageDialog(this, "El email no cumple las caracteristicas de un correo electronico");
+                        return;
                     }
                 }
                 preguntaS = cbValidacion.getSelectedIndex();

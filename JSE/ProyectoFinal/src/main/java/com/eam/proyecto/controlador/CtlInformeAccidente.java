@@ -37,14 +37,14 @@ import org.json.simple.parser.ParseException;
  */
 public class CtlInformeAccidente extends ControladorAbstracto {
 
-    public void listar(JTable tblAccidentes,Map<String,String> campos) {
+    public void listar(JTable tblAccidentes,Map<String,String> campos,String nipAgente) {
         String[] lista = {"ID","Fecha de informe", "Nombre del agente", "N° de heridos", "N° de muertos", "Croquis"};
         tblAccidentes.setDefaultRenderer(Object.class, new Render());
         DefaultTableModel modelo = new DefaultTableModel(new Object[][]{}, lista);
         try {
             String consulta = "InformeAccidente";
             if (campos != null) {
-                consulta += "/TraerAccidente/"+this.crearConsultaRegexpLike(campos);
+                consulta += "/TraerAccidente/"+this.crearConsultaRegexpLike(campos,nipAgente);
             }
             String response = this.traerlistar(consulta);
             JSONArray personas = ((JSONArray) (new JSONParser().parse(response)));
@@ -71,7 +71,7 @@ public class CtlInformeAccidente extends ControladorAbstracto {
         tblAccidentes.setRowHeight(60);
     }
     
-    private String crearConsultaRegexpLike(Map<String,String> campos){
+    private String crearConsultaRegexpLike(Map<String,String> campos,String nipAgente){
         String consulta = ""
                 + "SELECT "
                 + "     IA.* "
@@ -94,7 +94,6 @@ public class CtlInformeAccidente extends ControladorAbstracto {
                 + "ON(M.ID=P.MUNICIPIO_ID)"
                 + "WHERE ";
         
-        campos.put("P.NIP", campos.get("IA.TIPO_GRAVEDAD"));
         campos.put("P.NOMBRE_COMPLETO", campos.get("IA.TIPO_GRAVEDAD"));
         campos.put("P.FECHA_NACIMIENTO", campos.get("IA.TIPO_GRAVEDAD"));
         campos.put("M.NOMBRE", campos.get("IA.TIPO_GRAVEDAD"));
@@ -133,6 +132,11 @@ public class CtlInformeAccidente extends ControladorAbstracto {
                 consulta += " OR ";
             }
         }
+        
+        if (nipAgente != null) {
+            consulta += " AND P.Nip="+nipAgente;
+        }
+        
         try {
             return URLEncoder.encode(consulta, "UTF-8");
         } catch (UnsupportedEncodingException ex) {

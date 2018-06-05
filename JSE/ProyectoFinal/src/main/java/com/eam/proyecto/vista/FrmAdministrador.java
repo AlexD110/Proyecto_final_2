@@ -28,7 +28,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
         pnlVehiculos.add(pnlVehiculosO, BorderLayout.CENTER);
         pnlVehiculos.updateUI();
 
-        pnlAccidente pnlInforme = new pnlAccidente(this);
+        pnlAccidente pnlInforme = new pnlAccidente(this,null);
         pnlInformeAccidente.setViewportView(pnlInforme);
         pnlInformeAccidente.getViewport().setView(pnlInforme);
     }

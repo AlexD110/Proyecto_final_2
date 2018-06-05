@@ -27,9 +27,9 @@ import org.json.simple.parser.ParseException;
  */
 public class CtlUsuario extends ControladorAbstracto {
 
-    public void iniciarVentana(JFrame padre, String rol) {
+    public void iniciarVentana(JFrame padre, JSONObject obj) {
         padre.dispose();
-        switch (rol) {
+        switch (obj.get("Rol").toString()) {
             case "Administrador":
                 FrmAdministrador ventanaAdministrador = new FrmAdministrador();
                 ventanaAdministrador.setLocationRelativeTo(null);
@@ -46,7 +46,7 @@ public class CtlUsuario extends ControladorAbstracto {
                 ventanaFuncionario.setVisible(true);
                 return;
             case "Agente":
-                FrmAgente ventanaAgente = new FrmAgente();
+                FrmAgente ventanaAgente = new FrmAgente(obj.get("Cedula").toString(),obj.get("NombreUsu").toString());
                 ventanaAgente.setLocationRelativeTo(null);
                 ventanaAgente.setVisible(true);
                 return;

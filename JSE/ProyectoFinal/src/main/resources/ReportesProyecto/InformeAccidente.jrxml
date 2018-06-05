@@ -33,6 +33,12 @@
 	<subDataset name="DatosInforme" uuid="73aa8a62-de9a-42a2-96cb-f13a7d5b74ce">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Oracle Admin - Proyecto"/>
+		<parameter name="nip" class="java.lang.String"/>
+		<parameter name="fecha1" class="java.lang.String"/>
+		<parameter name="fecha2" class="java.lang.String"/>
+		<parameter name="municipio" class="java.lang.String"/>
+		<parameter name="clase" class="java.lang.String"/>
+		<parameter name="gravedad" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[SELECT 
     IA.Fecha_Hora,
@@ -45,7 +51,24 @@ FROM
     Informe_Accidente_Transito IA
 JOIN 
     Persona P
-ON(P.Nip=IA.Agente)]]>
+ON(P.Nip=IA.Agente)
+JOIN
+	Municipio M
+ON(M.Id=P.Municipio_Id)
+WHERE
+	P.Nip=$P{nip}
+OR
+	UPPER(M.Nombre)=UPPER($P{municipio})
+OR
+	(IA.Fecha_Hora 
+BETWEEN 
+	$P{fecha1} 
+AND 
+	$P{fecha2})
+OR
+	IA.Clase_Accidente = $P{clase}
+OR
+	IA.Tipo_Gravedad = $P{gravedad}]]>
 		</queryString>
 		<field name="FECHA_HORA" class="java.sql.Timestamp">
 			<property name="com.jaspersoft.studio.field.label" value="FECHA_HORA"/>
@@ -66,6 +89,12 @@ ON(P.Nip=IA.Agente)]]>
 			<property name="com.jaspersoft.studio.field.label" value="NOMBRE_COMPLETO"/>
 		</field>
 	</subDataset>
+	<parameter name="nipAgente" class="java.lang.String"/>
+	<parameter name="fechaInicio" class="java.lang.String"/>
+	<parameter name="fechaFin" class="java.lang.String"/>
+	<parameter name="municipioAccidente" class="java.lang.String"/>
+	<parameter name="claseAccidente" class="java.lang.String"/>
+	<parameter name="gravedadAccidente" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT 
     IA.Fecha_Hora,
@@ -137,15 +166,33 @@ ON(P.Nip=IA.Agente)]]>
 				<reportElement x="-20" y="0" width="595" height="1" forecolor="#666666" uuid="22c63baa-37d7-40a8-bdc0-d980ae0179cc"/>
 			</line>
 			<componentElement>
-				<reportElement x="30" y="34" width="479" height="59" uuid="1fbe96a4-c91b-4d72-ae34-c7944e385019">
+				<reportElement x="30" y="34" width="480" height="59" uuid="1fbe96a4-c91b-4d72-ae34-c7944e385019">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 				</reportElement>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="DatosInforme" uuid="ced5f552-d1b4-4971-9147-4372e228f4b5">
-						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="Blank">
+					<datasetRun subDataset="DatosInforme" uuid="55411533-a25c-4ebb-89ef-a22a900f2b79">
+						<datasetParameter name="nip">
+							<datasetParameterExpression><![CDATA[$P{nipAgente}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="fecha1">
+							<datasetParameterExpression><![CDATA[$P{fechaInicio}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="fecha2">
+							<datasetParameterExpression><![CDATA[$P{fechaFin}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="clase">
+							<datasetParameterExpression><![CDATA[$P{claseAccidente}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="gravedad">
+							<datasetParameterExpression><![CDATA[$P{gravedadAccidente}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="municipio">
+							<datasetParameterExpression><![CDATA[$P{municipioAccidente}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION} ]]></connectionExpression>
 					</datasetRun>
 					<jr:column width="60" uuid="830359d7-f2e5-4f6d-bf87-6ef3bcbe8e70">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
