@@ -71,7 +71,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
         pnlPerUsu.setLayout(pnlPerUsuLayout);
         pnlPerUsuLayout.setHorizontalGroup(
             pnlPerUsuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
+            .addGap(0, 908, Short.MAX_VALUE)
         );
         pnlPerUsuLayout.setVerticalGroup(
             pnlPerUsuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,7 +84,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
         pnlVehiculos.setLayout(pnlVehiculosLayout);
         pnlVehiculosLayout.setHorizontalGroup(
             pnlVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
+            .addGap(0, 908, Short.MAX_VALUE)
         );
         pnlVehiculosLayout.setVerticalGroup(
             pnlVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,7 +104,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesion)

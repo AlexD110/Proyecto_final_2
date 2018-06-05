@@ -58,6 +58,8 @@ public abstract class ControladorAbstracto {
     
     public abstract DefaultTableModel listar(String entidad);
     
+        
+    
     protected Response registrar(String json,String entidad){
          return cliente.target(this.url + entidad+"/").request(MediaType.APPLICATION_JSON).post(Entity.json(json));
     }

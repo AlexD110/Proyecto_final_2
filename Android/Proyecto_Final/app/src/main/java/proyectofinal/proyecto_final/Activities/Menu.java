@@ -9,7 +9,6 @@ import android.widget.TextView;
 import org.json.JSONObject;
 
 import proyectofinal.proyecto_final.Activities.Accidente.ListaAccidente;
-import proyectofinal.proyecto_final.Activities.Accidente.MapaAccidente;
 import proyectofinal.proyecto_final.Activities.Accidente.RegistroAccidente;
 import proyectofinal.proyecto_final.Activities.Comparendo.BusquedaComparendo;
 import proyectofinal.proyecto_final.Activities.Comparendo.RegistrarComparendo;

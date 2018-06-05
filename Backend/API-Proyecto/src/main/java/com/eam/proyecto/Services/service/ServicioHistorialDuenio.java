@@ -82,4 +82,11 @@ public class ServicioHistorialDuenio extends EstructuraRestFulNegocio<HistorialD
         return String.valueOf(super.contar());
     }
     
+    @GET
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<HistorialDueno> listar() {
+        return super.listar();
+    }
+    
 }

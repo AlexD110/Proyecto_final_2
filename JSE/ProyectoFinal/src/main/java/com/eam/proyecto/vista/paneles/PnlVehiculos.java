@@ -14,6 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import org.json.simple.JSONObject;
@@ -37,7 +39,6 @@ public class PnlVehiculos extends javax.swing.JPanel {
         this.listaVehiculo();
         this.placaModificar = null;
         this.btnModificar.setEnabled(false);
-        this.btnActualizar.setEnabled(false);
         this.btnModificarUsuario.setEnabled(false);
         this.btnListarUsuario.setEnabled(false);
 
@@ -110,7 +111,6 @@ public class PnlVehiculos extends javax.swing.JPanel {
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtLicenciaTransito = new javax.swing.JTextField();
         txtNacionalidad = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
@@ -136,6 +136,7 @@ public class PnlVehiculos extends javax.swing.JPanel {
         txtFechaVehiculo = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
+        txtLicenciaTransito = new javax.swing.JFormattedTextField();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         lstPropietario = new javax.swing.JList<>();
@@ -152,7 +153,7 @@ public class PnlVehiculos extends javax.swing.JPanel {
         btnGuardar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        txtOperacion = new javax.swing.JTextField();
+        txtOperacion = new javax.swing.JFormattedTextField();
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -234,7 +235,7 @@ public class PnlVehiculos extends javax.swing.JPanel {
                     .addComponent(btnGuardarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnModificarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnBuscarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnListarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
+                    .addComponent(btnListarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -547,6 +548,13 @@ public class PnlVehiculos extends javax.swing.JPanel {
         jLabel47.setForeground(new java.awt.Color(255, 0, 0));
         jLabel47.setText("*");
 
+        txtLicenciaTransito.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtLicenciaTransito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLicenciaTransitoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -590,11 +598,11 @@ public class PnlVehiculos extends javax.swing.JPanel {
                                 .addContainerGap())))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLicenciaTransito, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel43)))
+                                .addComponent(jLabel43))
+                            .addComponent(txtLicenciaTransito, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
@@ -695,15 +703,15 @@ public class PnlVehiculos extends javax.swing.JPanel {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(jLabel43))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtLicenciaTransito, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel36)
                             .addComponent(jLabel37))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLicenciaTransito, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel17)
@@ -905,6 +913,8 @@ public class PnlVehiculos extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Numero de targeta de operacion:");
 
+        txtOperacion.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -912,19 +922,17 @@ public class PnlVehiculos extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtOperacion)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                            .addComponent(txtOperacion))))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -939,9 +947,9 @@ public class PnlVehiculos extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1001,6 +1009,8 @@ public class PnlVehiculos extends javax.swing.JPanel {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         this.listaVehiculo();
+        this.limpiarCampos();
+        JOptionPane.showMessageDialog(this, controVehiculo.numeroRegistros());
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -1023,14 +1033,10 @@ public class PnlVehiculos extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Por favor seleccione un propietario de la lista");
                 return;
             }
-            if ((!(txtEmpresa.getText().isEmpty())) && lstEmpresas.getSelectedIndex() < 0) {
-                JOptionPane.showMessageDialog(this, "Si desea agregar una empresa, seleccione uno de la lista");
-                return;
-            }
 
             String palca, modelo, linea, marca, licencia, nacionalidad, color, tipo, clase, propietario, empresa = null, targeta, lugar;
             int pasajeros, carga;
-            Date fecha;
+            Date fecha = null;
 
             palca = txtPlacaVehiculo.getText().trim().trim();
             modelo = txtModeloVehiculo.getText().trim().trim();
@@ -1053,27 +1059,40 @@ public class PnlVehiculos extends javax.swing.JPanel {
                 fecha = txtFechaVehiculo.getDate();
             }
 
-            if (txtEmpresa.getText().isEmpty()) {
+            if (txtEmpresa.getText().isEmpty() || txtEmpresa.getText().equalsIgnoreCase("Empresa del vehiculo")) {
                 if (controVehiculo.guardar(palca, modelo, linea, marca, licencia, clase, tipo, lugar, nacionalidad, color, null, carga, pasajeros, 0)) {
-                    JOptionPane.showMessageDialog(this, "Registro vehiculo exitoso");
-//                    if (true) {
-//                        
-//                    }
+                    if (controVehiculo.guardarDueño("", palca, propietario, fecha)) {
+                        JOptionPane.showMessageDialog(this, "Registro vehiculo exitoso");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Hubo un error");
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Hubo un error, por favor consultar al rey nicolas");
+                    JOptionPane.showMessageDialog(this, "La placa ya existe");
                 }
             } else {
-                if (txtOperacion.getText().isEmpty()) {
+                if (txtOperacion.getText().isEmpty() || txtOperacion.getText().equalsIgnoreCase("Targeta operacion")) {
                     JOptionPane.showMessageDialog(this, "Por favor llene la targeta de operacion");
+
                 } else {
 
-                    if (controVehiculo.guardar(palca, modelo, linea, marca, licencia, clase, tipo, lugar, nacionalidad, color, empresa, carga, pasajeros, Integer.parseInt(targeta))) {
-
+                    if ((!(txtEmpresa.getText().isEmpty())) && lstEmpresas.getSelectedIndex() < 0) {
+                        JOptionPane.showMessageDialog(this, "Si desea agregar una empresa, seleccione uno de la lista");
+                        return;
+                    } else if (controVehiculo.guardar(palca, modelo, linea, marca, licencia, clase, tipo, lugar, nacionalidad, color, empresa, carga, pasajeros, Integer.parseInt(targeta))) {
+                        if (controVehiculo.guardarDueño("", palca, propietario, fecha)) {
+                            JOptionPane.showMessageDialog(this, "Registro vehiculo exitoso");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Hubo un error");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "La placa ya existe");
                     }
+
                 }
             }
 
         }
+
         this.listaVehiculo();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -1081,7 +1100,7 @@ public class PnlVehiculos extends javax.swing.JPanel {
         String placa = null;
         if (tblVehiculos.getSelectedRow() < 0) {
             try {
-                placa = JOptionPane.showInputDialog("Ingrese la placa del usuario que desea buscar");
+                placa = JOptionPane.showInputDialog("Ingrese la placa del vehiculo que desea buscar");
             } catch (HeadlessException e) {
                 JOptionPane.showMessageDialog(this, "Debe ingresar una placa valida");
                 return;
@@ -1090,7 +1109,11 @@ public class PnlVehiculos extends javax.swing.JPanel {
             placa = tblVehiculos.getValueAt(tblVehiculos.getSelectedRow(), 0).toString();
         }
         if (placa != null) {
-//            this.llenarCamposPersona(this.controVehiculo.buscar(placa, "Vehiculo"));
+            try {
+                this.llenarCamposVehiculo(this.controVehiculo.buscar(controVehiculo.propietarioVehiculoActual(placa), "HistorialDuenio"));
+            } catch (org.json.simple.parser.ParseException ex) {
+                Logger.getLogger(PnlVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Debe ingresar un nip valido");
         }
@@ -1172,6 +1195,10 @@ public class PnlVehiculos extends javax.swing.JPanel {
             lstEmpresas.setModel(combo.modelList("Empresa", "nit", "nombre"));
         }
     }//GEN-LAST:event_txtEmpresaKeyReleased
+
+    private void txtLicenciaTransitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLicenciaTransitoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLicenciaTransitoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1263,7 +1290,7 @@ public class PnlVehiculos extends javax.swing.JPanel {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEmpresa;
     private com.toedter.calendar.JDateChooser txtFechaVehiculo;
-    private javax.swing.JTextField txtLicenciaTransito;
+    private javax.swing.JFormattedTextField txtLicenciaTransito;
     private javax.swing.JTextField txtLineaVehiculo;
     private javax.swing.JTextField txtLugarMatricula;
     private javax.swing.JTextField txtMarcaVehiculo;
@@ -1271,7 +1298,7 @@ public class PnlVehiculos extends javax.swing.JPanel {
     private javax.swing.JTextField txtModeloVehiculo3;
     private javax.swing.JTextField txtNacionalidad;
     private javax.swing.JTextField txtNombreUsuario;
-    private javax.swing.JTextField txtOperacion;
+    private javax.swing.JFormattedTextField txtOperacion;
     private javax.swing.JTextField txtPlacaVehiculo;
     private javax.swing.JTextField txtPlacaVehiculo3;
     private javax.swing.JTextField txtPropietario;
@@ -1297,6 +1324,10 @@ public class PnlVehiculos extends javax.swing.JPanel {
                 "Propietario del vehiculo", false, txtPropietario.getFont().toString(), 12);
         new PlaceHolder(txtEmpresa, new Color(117, 117, 117), Color.BLACK,
                 "Empresa del vehiculo", false, txtEmpresa.getFont().toString(), 12);
+        new PlaceHolder(txtLugarMatricula, new Color(117, 117, 117), Color.BLACK,
+                "Lugar matricula", false, txtEmpresa.getFont().toString(), 12);
+        new PlaceHolder(txtOperacion, new Color(117, 117, 117), Color.BLACK,
+                "Targeta operacion", false, txtEmpresa.getFont().toString(), 12);
     }
 
     private void cargarListas() {
@@ -1314,27 +1345,54 @@ public class PnlVehiculos extends javax.swing.JPanel {
 //        this.placaModificar = null;
     }
 
-//    private void llenarCamposPersona(JSONObject vehiculo) {
-//        try {
-//            txtPlacaVehiculo.setText(vehiculo.get("placa").toString());
-//            txtModeloVehiculo.setText(vehiculo.get("modelo").toString());
-//            cbTipovehiculo.setSelectedIndex(Integer.parseInt(((JSONObject) (vehiculo.get("tipoDocumento"))).get("id").toString()));
-//            cbMunicipio.setSelectedIndex(Integer.parseInt(((JSONObject) (vehiculo.get("municipioId"))).get("id").toString()));
-//            cbEps.setSelectedItem(vehiculo.get("eps").toString());
-//            txtTelefono.setText(vehiculo.get("telefono").toString());
-//            txtNumeroDocumento.setText(vehiculo.get("nip").toString());
-//            if (vehiculo.get("placa") != null) {
-//                txtNumeroPlaca.setText(vehiculo.get("placa").toString());
-//            }
-//            txtFechaVehiculo.setDate((new SimpleDateFormat("yyyy-MM-dd")).parse(((vehiculo.get("fechaNacimiento").toString()).split("T"))[0]));
-//            btnModificar.setEnabled(true);
-//            btnGuardar.setEnabled(false);
-//            btnActualizar.setEnabled(true);
-//            txtNumeroDocumento.setEditable(false);
-//            this.placaModificar = vehiculo.get("nip").toString();
-//        } catch (NullPointerException | ParseException e) {
-//            System.out.println(e);
-//        }
+    private void limpiarCampos() {
+        txtPlacaVehiculo.setText("Placa vehiculo");
+        txtModeloVehiculo.setText("Modelo del vehiculo");
+        txtLineaVehiculo.setText("Linea del vehiculo");
+        txtMarcaVehiculo.setText("Marca del vehiculo");
+        txtLicenciaTransito.setText("Licencia de transito");
+        txtNacionalidad.setText("Nacionalidad del vehoculo");
+        txtColorVehiculo.setText("Color del vehiculo");
+        txtLugarMatricula.setText("Lugar matricula");
+        txtEmpresa.setText("Empresa del vehiculo");
+        txtPropietario.setText("Propietario del vehiculo");
+        txtOperacion.setText("Targeta operacion");
+        spCarga.setValue(Integer.parseInt("0"));
+        spPasajeros.setValue(Integer.parseInt("0"));
+        txtFechaVehiculo.setDate(null);
+        cbClaseVehiculo.setSelectedIndex(0);
+        cbTipovehiculo.setSelectedIndex(0);
+
+    }
+
+    private void llenarCamposVehiculo(JSONObject vehiculo) {
+        try {
+            txtPlacaVehiculo.setText(((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("placa").toString());
+            txtModeloVehiculo.setText(((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("modelo").toString());
+            txtLineaVehiculo.setText(((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("linea").toString());
+            txtMarcaVehiculo.setText(((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("marca").toString());
+            txtLicenciaTransito.setText(((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("licenciaTransito").toString());
+            txtNacionalidad.setText(((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("nacionalidad").toString());
+            txtColorVehiculo.setText(((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("color").toString());
+            txtLugarMatricula.setText(((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("lugarMatricula").toString());
+            txtPropietario.setText((((JSONObject) (vehiculo.get("personaNip"))).get("nip").toString())
+                    + "-" + (((JSONObject) (vehiculo.get("personaNip"))).get("nombreCompleto").toString()));
+            if (((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("noTargetaOperacion").toString() != null) {
+                txtOperacion.setText(((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("noTargetaOperacion").toString());
+            }
+            txtFechaVehiculo.setDate((new SimpleDateFormat("yyyy-MM-dd")).parse(((vehiculo.get("fecha").toString()).split("T"))[0]));
+            cbClaseVehiculo.setSelectedItem(((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("claseVehiculo").toString());
+            cbTipovehiculo.setSelectedItem(((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("tipoVehiculo").toString());
+            spCarga.setValue(((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("capacidadCarga").toString());
+            spPasajeros.setValue(((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("numeroPasajeros").toString());
+            btnModificar.setEnabled(true);
+            btnGuardar.setEnabled(false);
+            btnActualizar.setEnabled(true);
+            txtPlacaVehiculo.setEditable(false);
+            this.placaModificar = ((JSONObject) (vehiculo.get("vehiculoPlaca"))).get("placa").toString();
+        } catch (NullPointerException | ParseException e) {
+            System.out.println(e);
+        }
 //    }
 //
 //    private void llenarCampoUsuario(JSONObject usuario) {
@@ -1384,4 +1442,6 @@ public class PnlVehiculos extends javax.swing.JPanel {
 //        cbValidacion.setSelectedIndex(0);
 //        cbPersona.setSelectedIndex(0);
 //    }
+
+    }
 }
